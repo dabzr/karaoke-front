@@ -1,15 +1,15 @@
-import { IUser } from "./user";
+import { ApiUser } from "./user";
 
 export interface ISong {
   name: string;
   artist?: string;
   url?: string;
-  user: IUser;
+  user: ApiUser;
 };
 
 export interface ApiSong {
   id: string;
   name: string;
   url?: string;
-  user: IUser;
+  user: ApiUser;
 }

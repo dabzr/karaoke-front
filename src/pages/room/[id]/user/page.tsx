@@ -15,6 +15,7 @@ export function UserRoomPage() {
     open,
     openModal,
     onClose,
+    queue,
   } = useUserRoom();
 
   if(isLoading) return <Loading/>
@@ -39,7 +40,7 @@ export function UserRoomPage() {
         </div>
       </div> 
       <div className="bg-gray-50 shadow-md mb-5 overflow-y-auto flex-1 mx-4">
-        <SongQueue songs={room.songs}/>
+        <SongQueue songs={queue}/>
       </div>
       <div className="flex justify-center pb-15 shrink-0">
         <button className="bg-gray-200 p-4 rounded-md shadow-md" onClick={openModal}>

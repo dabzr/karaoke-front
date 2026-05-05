@@ -15,7 +15,7 @@ export function Toast({
   return (
     <Snackbar 
       open={!!error} 
-      autoHideDuration={2000} 
+      autoHideDuration={5000} 
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       onClose={handleCloseError}
     >

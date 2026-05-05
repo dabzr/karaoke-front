@@ -16,6 +16,7 @@ export function HostRoomPage() {
     handleEdit,
     qrCodeUrl,
     isLoading,
+    queue,
   } = useHostRoom();
 
   if(isLoading) return <Loading/>
@@ -53,10 +54,10 @@ export function HostRoomPage() {
         activeButtonText={activeButton}
         onChange={(button) => setActiveButton(button)}
       />
-      <div className="bg-gray-50 shadow-md mx-20 mb-5 px-20 overflow-y-auto h-180">
+      <div className="flex flex-col bg-gray-50 shadow-md mx-20 mb-5 px-20 overflow-y-auto h-180">
         {activeButton === strings[language][queueString] && 
           <div className="py-10">
-            <SongQueue songs={room.songs}/>
+            <SongQueue songs={queue}/>
           </div>
         }
         {activeButton === strings[language][participantsString] && <div></div>}
