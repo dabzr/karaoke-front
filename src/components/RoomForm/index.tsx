@@ -66,10 +66,12 @@ export function RoomForm({
   }
 
   return (
-    <div className="flex flex-col justify-center items-center w-full">
-      <div className="p-2 text-xl">{title}</div>
-      <div className="bg-gray-400 w-full h-[2px]"></div>
-      <div className="p-2">
+    <div className="flex flex-col items-center w-full h-full justify-between">
+      <div className="w-full text-center flex-auto">
+        <div className="p-2 text-xl">{title}</div>
+        <div className="bg-gray-400 w-full h-[2px]"></div>
+      </div>
+      <div className="flex-auto w-full max-w-100 items-center">
         <Input
           label={strings[language][nameString]}
           value={name}
@@ -98,20 +100,22 @@ export function RoomForm({
           error={maxQuantityError}
           disabled={maxQuantityDisabled}
         />
+        {children && <>{children}</>}
       </div>
-      {children && <div>{children}</div>}
-      <div className="bg-gray-400 w-full h-[2px]"></div>
-      <div className="flex justify-between w-full mt-2">
-        <Button
-          label={strings[language][cancelString]} 
-          onClick={handleClose}
-          disabled={buttonDisabled}
-        />
-        <Button 
-          disabled={buttonDisabled}
-          label={successButtonText}
-          onClick={successFunction}
-        />
+      <div className="w-full flex-auto">
+        <div className="bg-gray-400 w-full h-[2px]"></div>
+        <div className="flex justify-between w-full mt-2">
+          <Button
+            label={strings[language][cancelString]} 
+            onClick={handleClose}
+            disabled={buttonDisabled}
+          />
+          <Button 
+            disabled={buttonDisabled}
+            label={successButtonText}
+            onClick={successFunction}
+          />
+        </div>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import { language } from "../../utils/settings";
 
 export function JoinPage() {
 
-  const {code, setCode, codeError, handleEnter, isLoading} = useJoin();
+  const {code, setCode, codeError, handleEnter, isLoading } = useJoin();
 
   return (
     <div className="flex flex-col p-14 min-h-screen"> 

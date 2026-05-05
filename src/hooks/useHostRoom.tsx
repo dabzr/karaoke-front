@@ -8,6 +8,7 @@ import { strings, queueString } from "../utils/strings";
 import { language, url } from "../utils/settings";
 import { joinRoute } from "../utils/routes";
 import * as QRCode from 'qrcode';
+import { useQueue } from "./useQueue";
 
 export function useHostRoom() {
   const { id } = useParams();
@@ -18,7 +19,11 @@ export function useHostRoom() {
   const navigator = useNavigate();
   const [activeButton, setActiveButton] = useState<string>(strings[language][queueString]);
   const [qrCodeUrl, setQrCodeUrl] = useState<string>("");
+<<<<<<< Updated upstream
   const [songs, setSongs] = useState<ISong[]>([]);
+=======
+  const { queue } = useQueue(id ?? "");
+>>>>>>> Stashed changes
 
   useEffect(() => {
     setIsLoading(true);
@@ -64,5 +69,6 @@ export function useHostRoom() {
     qrCodeUrl,
     songs,
     isLoading,
+    queue,
   }
 }

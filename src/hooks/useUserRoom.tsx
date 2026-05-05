@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import { getRoomAndSongs } from "../services/room";
 import { IRoom } from "../interfaces/room";
 import { useNavigate, useParams } from "react-router-dom";
+<<<<<<< Updated upstream
 import { createRoomMap, ICreateRoomParams } from "../mappers/createRoom";
 import { ISong } from "../interfaces/song";
+=======
+import { useQueue } from "./useQueue";
+>>>>>>> Stashed changes
 
 export function useUserRoom() {
   const { id } = useParams();
@@ -13,6 +17,7 @@ export function useUserRoom() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState(null);
   const navigator = useNavigate();
+  const { queue } = useQueue(id ?? "");
 
   useEffect(() => {
     setIsLoading(true);
@@ -39,5 +44,12 @@ export function useUserRoom() {
     navigator,
     goToProfilePage,
     isLoading,
+<<<<<<< Updated upstream
+=======
+    open,
+    openModal,
+    onClose,
+    queue,
+>>>>>>> Stashed changes
   }
 }

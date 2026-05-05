@@ -64,9 +64,9 @@ export function RoomData({
 
   return (
     <>
-      <div className="flex items-center pt-2 justify-end">
+      <div className="absolute left-9/10 pt-2">
         <button onClick={() => setOnEdit(true)}>
-          <Tooltip title={"Editar"}>
+          <Tooltip title={strings[language][editString]}>
             <EditIcon/>
           </Tooltip>
         </button>

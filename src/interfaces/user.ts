@@ -4,3 +4,7 @@ export interface IUser {
   name: string;
   roomCode: string;
 };
+
+export interface ApiUser {
+  name: string;
+}
