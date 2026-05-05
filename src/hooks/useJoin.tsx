@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { joinRoom } from "../services/join";
+import { getRoomInfo } from "../services/join";
 import { joinRoute } from "../utils/routes";
 import { strings, invalidRoomCodeString } from "../utils/strings";
 import { language } from "../utils/settings";
@@ -17,7 +17,7 @@ export function useJoin() {
       return;
     }
     setIsLoading(true);
-    joinRoom(code)
+    getRoomInfo(code)
       .then(() => {
         navigator(`${joinRoute}/${code}`)
       })

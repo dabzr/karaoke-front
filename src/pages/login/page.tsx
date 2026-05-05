@@ -2,7 +2,6 @@ import { TopBar } from "../../components/TopBar/index";
 import { Input } from "../../components/Input/index";
 import { Button } from "../../components/Button/index";
 import { useLogin } from "../../hooks/useLogin";
-import CircularProgress from '@mui/material/CircularProgress';
 import { Loading } from "../../components/Loading/index";
 
 export function LoginPage() {

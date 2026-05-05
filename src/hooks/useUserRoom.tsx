@@ -1,19 +1,14 @@
 import { useEffect, useState } from "react";
-import { getRoomAndSongs } from "../services/room";
+import { getRoomAndSongsWithUser } from "../services/room";
 import { IRoom } from "../interfaces/room";
 import { useNavigate, useParams } from "react-router-dom";
-<<<<<<< Updated upstream
-import { createRoomMap, ICreateRoomParams } from "../mappers/createRoom";
-import { ISong } from "../interfaces/song";
-=======
 import { useQueue } from "./useQueue";
->>>>>>> Stashed changes
 
 export function useUserRoom() {
   const { id } = useParams();
 
   const [room, setRoom] = useState<IRoom>();
-  const [songs, setSongs] = useState<ISong[]>([]);
+  const [open, setOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState(null);
   const navigator = useNavigate();
@@ -21,10 +16,9 @@ export function useUserRoom() {
 
   useEffect(() => {
     setIsLoading(true);
-    getRoomAndSongs(id ?? "")
+    getRoomAndSongsWithUser(id ?? "")
       .then((data) => {
-        setRoom(data.room)
-        setSongs(data.songs)
+        setRoom(data)
       })
       .catch((error) => {
         setError(error); 
@@ -38,18 +32,20 @@ export function useUserRoom() {
     navigator("/user")
   }
 
+  const openModal = () => setOpen(true);
+
+  const onClose = () => {
+    setOpen(false);
+  }
+
   return {
     room,
-    songs,
     navigator,
     goToProfilePage,
     isLoading,
-<<<<<<< Updated upstream
-=======
     open,
     openModal,
     onClose,
     queue,
->>>>>>> Stashed changes
   }
 }

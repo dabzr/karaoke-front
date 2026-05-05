@@ -24,13 +24,21 @@ export const invalidRoomCodeString = "invalid-room-code";
 export const roomNotFoundString = "room-not-found";
 export const writePasswordString = "write-password";
 export const writeNameString = "write-name";
-export const invalidPasswordString = "invalid-password";
+export const invalidPasswordString = "Invalid Password";
 export const addSongString = "add-song";
 export const noMusicString = "no-music";
 export const positionString = "position";
 export const songString = "music";
 export const singerString = "singer";
 export const profileString = "profile";
+export const invalidEmailString = "invalid-email";
+export const logoutString = "logout";
+export const invalidSizeRoomString = "Your plan don't cover a room that big, upgrade your plan for unlimited sized rooms";
+export const backString = "back";
+export const youtubeUrlRequired = "youtube-url-required";
+export const songNameString = "song-name"; 
+export const urlString = "url"; 
+export const addString = "add"; 
 
 export const strings: {[locale: string]: {[key: string]: string}} = {
   "pt-br": {
@@ -66,5 +74,13 @@ export const strings: {[locale: string]: {[key: string]: string}} = {
     [songString]: "Música",
     [singerString]: "Cantor",
     [profileString]: "Perfil",
+    [invalidEmailString]: "Digite um email",
+    [logoutString]: "Fazer Logout",
+    [invalidSizeRoomString]: "Seu plano não cobre uma sala tão grande, atualize seu plano para criar salas com quantidade ilimitada de participantes",
+    [backString]: "Voltar",
+    [youtubeUrlRequired]: "O link deve ser um link válido do youtube",
+    [songNameString]: "Nome da música",
+    [urlString]: "Link do youtube",
+    [addString]: "Adicionar",
   },
 };

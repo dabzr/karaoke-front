@@ -39,7 +39,7 @@ export function NumberInput({
     <>
       <Input
         label={label}
-        required
+        required={required}
         onChange={(value) => handleChange(value)}
         placeholder={placeholder}
         value={value}

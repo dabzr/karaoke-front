@@ -24,7 +24,7 @@ export function Input({
 }: Props) {
 
   const handleChange = (newValue: string) => {
-    if(newValue.length <= maxLength) onChange(newValue); 
+    if(newValue.length <= maxLength && onChange) onChange(newValue); 
   };
   
   return (

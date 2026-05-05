@@ -6,7 +6,7 @@ import { Input } from "../../../components/Input";
 import { IRoom } from "../../../interfaces/room";
 import { strings, roomDataString, roomCodeString, editString, requiredFieldString } from "../../../utils/strings";
 import { language } from "../../../utils/settings";
-import { ICreateRoomParams } from "../../../mappers/createRoom";
+import { ICreateRoomParams } from "../../../mappers/room";
 
 type Props = {
   handleEdit: (newData: ICreateRoomParams) => void;

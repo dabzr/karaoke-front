@@ -1,15 +1,11 @@
-<<<<<<< Updated upstream
-=======
 import { ApiUser } from "./user";
->>>>>>> Stashed changes
 
 export interface ISong {
   name: string;
   artist?: string;
-  link?: string;
+  url?: string;
+  user: ApiUser;
 };
-<<<<<<< Updated upstream
-=======
 
 export interface ApiSong {
   id: string;
@@ -17,4 +13,3 @@ export interface ApiSong {
   url?: string;
   user: ApiUser;
 }
->>>>>>> Stashed changes

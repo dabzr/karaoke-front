@@ -2,7 +2,7 @@ import Modal from '@mui/material/Modal';
 import { strings, requiredFieldString, createRoomString, createString } from "../../utils/strings";
 import { language } from "../../utils/settings";
 import { useState } from 'react';
-import { ICreateRoomParams } from '../../mappers/createRoom';
+import { ICreateRoomParams } from '../../mappers/room';
 import { RoomForm } from '../../components/RoomForm/index';
 
 type Props = {

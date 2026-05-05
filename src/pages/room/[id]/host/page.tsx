@@ -15,7 +15,6 @@ export function HostRoomPage() {
     setActiveButton,
     handleEdit,
     qrCodeUrl,
-    songs,
     isLoading,
     queue,
   } = useHostRoom();
@@ -58,11 +57,7 @@ export function HostRoomPage() {
       <div className="flex flex-col bg-gray-50 shadow-md mx-20 mb-5 px-20 overflow-y-auto h-180">
         {activeButton === strings[language][queueString] && 
           <div className="py-10">
-<<<<<<< Updated upstream
-            <SongQueue songs={songs}/>
-=======
             <SongQueue songs={queue}/>
->>>>>>> Stashed changes
           </div>
         }
         {activeButton === strings[language][participantsString] && <div></div>}

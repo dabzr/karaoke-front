@@ -1,5 +1,4 @@
 import { Alert, Snackbar } from "@mui/material";
-import { toastDefaultAutoHideDuration } from "../../utils/settings";
 
 type Props = {
   error: string;

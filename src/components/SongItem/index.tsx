@@ -13,7 +13,7 @@ export function SongItem({ song, index }: Props) {
         <div>{song.name}</div>
         <div>{song.artist || "-"}</div>
       </div>
-      <div>{"-"}</div>
+      <div>{song.user.name}</div>
     </div>
   );
 }

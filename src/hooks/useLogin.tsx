@@ -2,7 +2,8 @@ import { useState } from "react";
 import { login } from "../services/auth";
 import { roomsRoute } from "../utils/routes";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
+import { strings, invalidEmailString } from "../utils/strings";
+import { language } from "../utils/settings";
 
 export function useLogin() {
   const [email, setEmail] = useState<string>("");
@@ -13,16 +14,13 @@ export function useLogin() {
   const handleLogin = () => {
     setIsLoading(true); 
     if(email === "") {
-      setError("Digite um email");
+      setError(strings[language][invalidEmailString]);
       setIsLoading(false); 
       return;
     }
     login(email)
       .then((res) => {
-        if(res){
-          Cookies.set("id", res.data.id)
-          navigator(`${roomsRoute}`)
-        }
+        if(res) navigator(`${roomsRoute}`)
       })
       .catch((error) => {
         setError(error);
@@ -38,6 +36,5 @@ export function useLogin() {
     isLoading,
     handleLogin,
     error,
-    isLoading,
   }
 }
