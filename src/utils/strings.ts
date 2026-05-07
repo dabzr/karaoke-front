@@ -39,6 +39,8 @@ export const youtubeUrlRequired = "youtube-url-required";
 export const songNameString = "song-name"; 
 export const urlString = "url"; 
 export const addString = "add"; 
+export const loginString = "login"; 
+export const createAccountString = "create-account"; 
 
 export const strings: {[locale: string]: {[key: string]: string}} = {
   "pt-br": {
@@ -82,5 +84,7 @@ export const strings: {[locale: string]: {[key: string]: string}} = {
     [songNameString]: "Nome da música",
     [urlString]: "Link do youtube",
     [addString]: "Adicionar",
+    [loginString]: "Fazer Login",
+    [createAccountString]: "Criar Conta",
   },
 };

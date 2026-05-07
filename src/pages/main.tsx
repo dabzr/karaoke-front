@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { roomRoute, roomsRoute, joinRoute } from "../utils/routes";
+import { roomRoute, roomsRoute, joinRoute, loginRoute, registerRoute } from "../utils/routes";
 import { RoomsPage } from "./room/page";
 import { RoomPage } from "./room/[id]/page";
 import { JoinPage } from "./join/page";
@@ -7,12 +7,16 @@ import { JoinIdPage } from "./join/[id]/page";
 import { LoginPage } from "./login/page";
 import { PublicRoute } from "../components/PublicRoute/index";
 import { ProtectedRoute } from "../components/ProtectedRoute/index";
+import { HomePage } from "./page";
+import { RegisterPage } from "./register/page";
 
 export const RoutesPages = () => {
   return (
     <>
       <Routes>
-        <Route path={'/'} element={<PublicRoute Component={LoginPage}/>} />
+        <Route path={'/'} element={<PublicRoute Component={HomePage}/>} />
+        <Route path={loginRoute} element={<PublicRoute Component={LoginPage}/>} />
+        <Route path={registerRoute} element={<PublicRoute Component={RegisterPage}/>} />
         <Route path={roomsRoute} element={<ProtectedRoute Component={RoomsPage}></ProtectedRoute>} />
         <Route path={roomsRoute} element={<ProtectedRoute Component={RoomsPage}></ProtectedRoute>} />
         <Route path={roomRoute + "/:id"} element={<RoomPage/>} />

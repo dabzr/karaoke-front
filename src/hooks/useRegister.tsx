@@ -1,16 +1,18 @@
 import { useState } from "react";
-import { login } from "../services/auth";
-import { roomsRoute } from "../utils/routes";
+import { register } from "../services/auth";
+import { loginRoute } from "../utils/routes";
 import { useNavigate } from "react-router-dom";
 import { strings, requiredFieldString } from "../utils/strings";
 import { language } from "../utils/settings";
 
-export function useLogin() {
+export function useRegister() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [emailError, setEmailError] = useState<string>("");
   const [passwordError, setPasswordError] = useState<string>("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
   const [error, setError] = useState<string>("");
   const navigator = useNavigate();
 
@@ -22,6 +24,10 @@ export function useLogin() {
     {
       "condition": () => password === "",
       "error": () => setPasswordError(strings[language][requiredFieldString])
+    },
+    {
+      "condition": () => confirmPassword === "",
+      "error": () => setConfirmPasswordError(strings[language][requiredFieldString])
     },
   ]
 
@@ -42,9 +48,9 @@ export function useLogin() {
       setIsLoading(false);
       return;
     }
-    login(email, password)
+    register(email, password)
       .then((res) => {
-        if(res) navigator(`${roomsRoute}`)
+        if(res) navigator(`${loginRoute}`)
       })
       .catch((error) => {
         setError(error);
@@ -57,6 +63,15 @@ export function useLogin() {
   const returnPage = () => {
     navigator("/")
   }
+  const changePassword = (value: string) => {
+    setConfirmPasswordError(confirmPassword && confirmPassword !== value ? "As senhas não coincidem" : "");
+    setPassword(value);
+  }
+
+  const verifyConfirmPassword = (value: string) => {
+    setConfirmPasswordError(password !== value ? "As senhas não coincidem" : "");
+    setConfirmPassword(value);
+  }
 
   return {
     email,
@@ -66,9 +81,12 @@ export function useLogin() {
     error,
     returnPage,
     password,
-    setPassword,
+    changePassword,
     returnPage,
     emailError,
     passwordError,
+    confirmPassword,
+    verifyConfirmPassword,
+    confirmPasswordError,
   }
 }

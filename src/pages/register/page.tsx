@@ -1,15 +1,15 @@
 import { TopBar } from "../../components/TopBar/index";
 import { Input } from "../../components/Input/index";
 import { Button } from "../../components/Button/index";
-import { useLogin } from "../../hooks/useLogin";
+import { useRegister } from "../../hooks/useRegister";
 import { Loading } from "../../components/Loading/index";
 import { PasswordInput } from "../../components/PasswordInput";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Tooltip } from "@mui/material";
-import { strings, backString } from "../../utils/strings";
+import { strings, backString, createAccountString } from "../../utils/strings";
 import { language } from "../../utils/settings";
 
-export function LoginPage() {
+export function RegisterPage() {
 
   const { 
     email,
@@ -18,12 +18,14 @@ export function LoginPage() {
     handleLogin,
     error,
     password,
-    setPassword,
+    changePassword,
     returnPage, 
     emailError,
     passwordError,
-  } = useLogin();
-
+    confirmPassword,
+    verifyConfirmPassword,
+    confirmPasswordError,
+  } = useRegister();
 
   if(isLoading) return <Loading/>
 
@@ -50,16 +52,24 @@ export function LoginPage() {
           <PasswordInput
             label={"Senha"}
             required
-            onChange={(value) => setPassword(value)}
+            onChange={(value) => changePassword(value)}
             value={password}
             maxLength={100}
             error={passwordError}
           />
+          <PasswordInput
+            label={"Confirmar Senha"}
+            required
+            onChange={(value) => verifyConfirmPassword(value)}
+            value={confirmPassword}
+            maxLength={100}
+            error={confirmPasswordError}
+          />
           <div>
             <Button
-              label={"Logar"}
+              label={strings[language][createAccountString]}
               onClick={() => handleLogin()}
-              disabled={isLoading}
+              disabled={isLoading || confirmPassword && password !== confirmPassword}
             />
           </div>
         </div>
