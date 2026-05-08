@@ -3,11 +3,11 @@ import { useHostRoom } from "../../../../hooks/useHostRoom";
 import { ButtonGroup } from "../../../../components/ButtonGroup/index";
 import { strings, queueString, participantsString, dataString, roomCodeString, roomNotFoundString } from "../../../../utils/strings";
 import { language } from "../../../../utils/settings";
-import { RoomData } from "../RoomData";
+import { RoomData } from "../../../../components/RoomData/index";
 import { SongQueue } from "../../../../components/SongQueue/index";
 import { Loading } from "../../../../components/Loading/index";
 
-export function HostRoomPage() { 
+export function ManagerRoomPage() { 
 
   const { 
     room,

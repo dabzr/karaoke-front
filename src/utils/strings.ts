@@ -41,6 +41,11 @@ export const urlString = "url";
 export const addString = "add"; 
 export const loginString = "login"; 
 export const createAccountString = "create-account"; 
+export const managerNotFoundString = "Manager not found"; 
+export const alreadyHasAccountString = "already-has-account";
+export const goToLoginString = "go-to-login";
+export const notHaveAccountYetString = "not-have-account-yet";
+export const createOneString = "create-one";
 
 export const strings: {[locale: string]: {[key: string]: string}} = {
   "pt-br": {
@@ -86,5 +91,10 @@ export const strings: {[locale: string]: {[key: string]: string}} = {
     [addString]: "Adicionar",
     [loginString]: "Fazer Login",
     [createAccountString]: "Criar Conta",
+    [managerNotFoundString]: "Usuário não encontrado",
+    [alreadyHasAccountString]: "Já possui conta?",
+    [goToLoginString]: "Ir para o login",
+    [notHaveAccountYetString]: "Ainda não possui conta?",
+    [createOneString]: "Crie uma",
   },
 };

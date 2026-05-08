@@ -1,12 +1,12 @@
 import { Tooltip } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
-import { RoomForm } from "../../../components/RoomForm";
+import { RoomForm } from "../../components/RoomForm";
 import { useEffect, useState } from "react";
-import { Input } from "../../../components/Input";
-import { IRoom } from "../../../interfaces/room";
-import { strings, roomDataString, roomCodeString, editString, requiredFieldString } from "../../../utils/strings";
-import { language } from "../../../utils/settings";
-import { ICreateRoomParams } from "../../../mappers/room";
+import { Input } from "../../components/Input";
+import { IRoom } from "../../interfaces/room";
+import { strings, roomDataString, roomCodeString, editString, requiredFieldString } from "../../utils/strings";
+import { language } from "../../utils/settings";
+import { ICreateRoomParams } from "../../mappers/room";
 
 type Props = {
   handleEdit: (newData: ICreateRoomParams) => void;

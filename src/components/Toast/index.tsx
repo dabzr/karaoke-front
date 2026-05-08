@@ -19,7 +19,7 @@ export function Toast({
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       onClose={handleCloseError}
     >
-      <Alert variant="filled" severity={severity} sx={{ width: '50%' }} onClose={handleCloseError}>
+      <Alert variant="filled" severity={severity} sx={{ width: '100%' }} onClose={handleCloseError}>
         {error}
       </Alert>
     </Snackbar>

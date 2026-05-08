@@ -18,7 +18,7 @@ export async function logout(): Promise<boolean> {
   return true;
 }
 
-export async function register(email, password): Promise<boolean> {
+export async function register(email: string, password: string): Promise<boolean> {
   const res = await api.post(managerEndpoint, { email, password });
   return true;
 }

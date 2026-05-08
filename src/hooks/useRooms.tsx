@@ -3,7 +3,7 @@ import { createRoom } from "../services/rooms"
 import { IRoom } from "../interfaces/room";
 import { ICreateRoomParams } from "../mappers/room";
 import { useNavigate } from "react-router-dom";
-import { roomRoute } from "../utils/routes";
+import { managerRoomRoute } from "../utils/routes";
 import { strings } from "../utils/strings";
 import { language } from "../utils/settings";
 
@@ -21,7 +21,7 @@ export function useRooms() {
     createRoom(data)
       .then((room) => {
         setRooms((prev) => [...prev, room]);
-        navigator(`${roomRoute}/${room.code}`)
+        navigator(`${managerRoomRoute}/${room.code}`)
       })
       .catch((error) => {
         const message = strings[language][error.response.data.message];

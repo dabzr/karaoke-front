@@ -2,7 +2,7 @@ import { useState } from "react";
 import { login } from "../services/auth";
 import { roomsRoute } from "../utils/routes";
 import { useNavigate } from "react-router-dom";
-import { strings, requiredFieldString } from "../utils/strings";
+import { strings, requiredFieldString, managerNotFoundString } from "../utils/strings";
 import { language } from "../utils/settings";
 
 export function useLogin() {
@@ -47,16 +47,17 @@ export function useLogin() {
         if(res) navigator(`${roomsRoute}`)
       })
       .catch((error) => {
-        setError(error);
+        const errorMessage = error.response.data.message;
+        setError(strings[language][errorMessage]);
       })
       .finally(() => {
         setIsLoading(false);
       });
   }
 
-  const returnPage = () => {
-    navigator("/")
-  }
+  const returnPage = () => navigator("/");
+
+  const handleCloseError = () => setError("");
 
   return {
     email,
@@ -67,8 +68,8 @@ export function useLogin() {
     returnPage,
     password,
     setPassword,
-    returnPage,
     emailError,
     passwordError,
+    handleCloseError,
   }
 }

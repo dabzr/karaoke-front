@@ -1,4 +1,3 @@
-import { TopBar } from "../../components/TopBar/index";
 import { Input } from "../../components/Input/index";
 import { Button } from "../../components/Button/index";
 import { useRegister } from "../../hooks/useRegister";
@@ -6,8 +5,10 @@ import { Loading } from "../../components/Loading/index";
 import { PasswordInput } from "../../components/PasswordInput";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Tooltip } from "@mui/material";
-import { strings, backString, createAccountString } from "../../utils/strings";
-import { language } from "../../utils/settings";
+import { strings, backString, createAccountString, alreadyHasAccountString, goToLoginString } from "../../utils/strings";
+import { language, url } from "../../utils/settings";
+import { loginRoute } from "../../utils/routes";
+import { DefaultTopBar } from "../../components/DefaultTopBar";
 
 export function RegisterPage() {
 
@@ -31,7 +32,7 @@ export function RegisterPage() {
 
   return (
     <div className="flex flex-col p-14 min-h-screen"> 
-      <TopBar/>
+      <DefaultTopBar/>
       <div className="flex justify-start">
         <button onClick={returnPage} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
           <Tooltip title={strings[language][backString]}>
@@ -65,12 +66,20 @@ export function RegisterPage() {
             maxLength={100}
             error={confirmPasswordError}
           />
-          <div>
+          <div className="flex flex-col gap-5 w-100 mt-2 justify-center">
             <Button
               label={strings[language][createAccountString]}
               onClick={() => handleLogin()}
               disabled={isLoading || confirmPassword && password !== confirmPassword}
             />
+            <div className="flex justify-center gap-2">
+              <label>
+                {strings[language][alreadyHasAccountString]}
+              </label>
+              <a href={`${url + loginRoute}`} className="text-blue-600 underline visited:text-blue-600">
+                {strings[language][goToLoginString]}
+              </a>
+            </div>
           </div>
         </div>
       </div>
