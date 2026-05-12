@@ -4,7 +4,7 @@ import { language } from "../../../utils/settings";
 import { useUserRoom } from "../../../hooks/useUserRoom";
 import { SongQueue } from "../../../components/SongQueue/index";
 import { Loading } from "../../../components/Loading/index";
-import { AddRoomModal } from "./AddRoomModal";
+import { AddSongModal } from "./AddSongModal";
 
 export function RoomPage() { 
 
@@ -46,7 +46,7 @@ export function RoomPage() {
         <button className="bg-gray-200 p-4 rounded-md shadow-md" onClick={openModal}>
           {strings[language][addSongString]}
         </button>
-        <AddRoomModal open={open} onClose={onClose}/>
+        <AddSongModal open={open} onClose={onClose}/>
       </div>
     </div>
   );

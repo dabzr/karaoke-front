@@ -5,7 +5,7 @@ import { useState } from "react";
 import { youtubeLinkRegex } from "../../../utils/regex";
 import { useParams } from 'react-router-dom';
 import { addSong } from '../../../services/song';
-import { strings, requiredFieldString, addString, youtubeUrlRequired, songNameString, urlString, cancelString, addSongString } from '../../../utils/strings';
+import { strings, requiredFieldString, addString, youtubeUrlRequired, songNameString, urlString, cancelString, addSongString, artistNameString } from '../../../utils/strings';
 import { language } from '../../../utils/settings';
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
   onClose: () => void;
 }
 
-export function AddRoomModal({
+export function AddSongModal({
   open,
   onClose,
 }: Props) {
@@ -21,6 +21,8 @@ export function AddRoomModal({
   const { id } = useParams();
   const [name, setName] = useState<string>("");
   const [nameError, setNameError] = useState<string>("");
+  const [artistName, setArtistName] = useState<string>("");
+  const [artistNameError, setArtistNameError] = useState<string>("");
   const [url, setUrl] = useState<string>("");
   const [urlError, setUrlError] = useState<string>("");
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
@@ -53,7 +55,7 @@ export function AddRoomModal({
     setButtonDisabled(true);
     const hasError = validate();
     if(!hasError) {
-      addSong(id ?? "", name, url)
+      addSong(id ?? "", name, artistName, url)
       .then(() => {
         handleClose();
       })
@@ -86,6 +88,13 @@ export function AddRoomModal({
               required={true}
               maxLength={50}
               error={nameError}
+            />
+            <Input
+              label={strings[language][artistNameString]}
+              value={artistName}
+              onChange={setArtistName}
+              maxLength={50}
+              error={artistNameError}
             />
             <Input
               label={strings[language][urlString]} 
