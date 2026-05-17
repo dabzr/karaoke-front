@@ -11,11 +11,11 @@ export function ProtectedRoute({
   Component
 }: Props) {
   
-  const { isHost, isLoading, error, logout } = useIsHost();
+  const { host, isLoading, error, logout } = useIsHost();
 
   if(isLoading) return <Loading/>
   
-  if(!isHost) {
+  if(!host) {
     logout();
     return <Navigate to="/" replace/>
   }

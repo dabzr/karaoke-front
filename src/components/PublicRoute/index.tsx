@@ -2,7 +2,7 @@ import { useIsHost } from "../../hooks/useIsHost";
 import { Loading } from "../Loading/index";
 import { ElementType } from "react";
 import { Navigate } from "react-router-dom";
-import { roomsRoute } from "../../utils/routes";
+import { managerRoomRoute, roomsRoute } from "../../utils/routes";
 
 type Props = {
   Component: ElementType;
@@ -12,11 +12,11 @@ export function PublicRoute({
   Component
 }: Props) {
   
-  const { isHost, isLoading, error, logout } = useIsHost();
+  const { host, isLoading, error, logout } = useIsHost();
 
   if(isLoading) return <Loading/>
   
-  if(isHost) return <Navigate to={roomsRoute} replace/>
+  if(host) return <Navigate to={host.code ? `${managerRoomRoute}/${host.code}` : `${roomsRoute}}`} replace/>
 
   logout();
   return (

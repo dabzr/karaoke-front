@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { login } from "../services/auth";
-import { roomsRoute } from "../utils/routes";
+import { managerRoomRoute, roomsRoute } from "../utils/routes";
 import { useNavigate } from "react-router-dom";
-import { strings, requiredFieldString, managerNotFoundString } from "../utils/strings";
+import { strings, requiredFieldString } from "../utils/strings";
 import { language } from "../utils/settings";
 
 export function useLogin() {
@@ -44,7 +44,11 @@ export function useLogin() {
     }
     login(email, password)
       .then((res) => {
-        if(res) navigator(`${roomsRoute}`)
+        if(res.code) {
+          navigator(`${managerRoomRoute}/${res.code}`);
+          return;
+        }
+        navigator(`${roomsRoute}`);
       })
       .catch((error) => {
         const errorMessage = error.response.data.message;
