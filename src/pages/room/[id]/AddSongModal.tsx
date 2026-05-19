@@ -3,7 +3,7 @@ import { useState } from "react";
 import { youtubeLinkRegex } from "../../../utils/regex";
 import { useParams } from 'react-router-dom';
 import { addSong } from '../../../services/song';
-import { strings, requiredFieldString, youtubeUrlRequired, addSongString } from '../../../utils/strings';
+import { strings, requiredFieldString, youtubeUrlRequired, addSongString, cancelString, addString } from '../../../utils/strings';
 import { AddSongForm } from '../../../components/AddSongForm/index';
 import { language } from '../../../utils/settings';
 import { Input } from '../../../components/Input';
@@ -29,7 +29,7 @@ export function AddSongModal({
   const [url, setUrl] = useState<string>("");
   const [urlError, setUrlError] = useState<string>("");
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
-  const [showAddSongForm, setShowAddSongForm] = useState<boolean>(true);
+  const [showAddSongForm, setShowAddSongForm] = useState<boolean>(false);
   const [videos, setVideos] = useState<IVideo[]>([]);
 
   const validations = [
@@ -56,7 +56,7 @@ export function AddSongModal({
     return hasError;
   }
 
-  const handleAdd = () => {
+  const handleAdd = (name: string, url: string, artistName: string = "") => {
     setButtonDisabled(true);
     const hasError = validate();
     if(hasError) {
@@ -79,13 +79,21 @@ export function AddSongModal({
     setName("");
     setUrl("");
     onClose();
+    setShowAddSongForm(false);
+  }
+
+  const setData = (index: number) => {
+    if(videos.length === 0) return;
+    if(index >= videos.length) return;
+    const video = videos[index];
+    handleAdd(video.title, "https://youtu.be/" + video.id);
+    setVideos([]);
   }
 
   const searchVideos = () => {
     getVideoData(name)
       .then((data) => {
         setVideos(data);
-        console.log(data)
       })
       .catch((err) => {
         console.log(err);
@@ -110,9 +118,6 @@ export function AddSongModal({
               url={url}
               setUrl={(value: string) => setUrl(value)}
               urlError={urlError}
-              buttonDisabled={buttonDisabled}
-              handleClose={handleClose}
-              handleAdd={handleAdd}
             />
             :
             <div>
@@ -122,7 +127,10 @@ export function AddSongModal({
                     <Input
                       label={"Pesquisar música"}
                       value={name}
-                      onChange={(value: string) => setName(value)}
+                      onChange={(value: string) => {
+                        setVideos([]);
+                        setName(value)
+                      }}
                       required={true}
                     />
                   </div>
@@ -133,21 +141,34 @@ export function AddSongModal({
                   />
                 </div>
                 <div>
-                  {videos.map((video) => 
+                  {videos.map((video, index) => 
                     <div className="flex gap-2 items-center">
-                      <div>
+                      <button onClick={() => setData(index)}>
                         <img src={video.thumbnailUrl}></img>
-                      </div>
-                      <div className="flex flex-col">
+                      </button>
+                      <button className="flex flex-col" onClick={() => setData(index)}>
                         <span>{video.title}</span>
                         <span>{video.channelTitle}</span>
-                      </div>
+                      </button>
                     </div>
                   )}
                 </div>
               </div>
             </div>
           }
+          <div className="bg-gray-400 w-full h-[2px]"></div>
+          <div className="flex justify-between w-full mt-2">
+            <Button
+              label={strings[language][cancelString]} 
+              onClick={handleClose}
+              disabled={buttonDisabled}
+            />
+            <Button 
+              label={showAddSongForm ? strings[language][addString] : "Adicionar manualmente"}
+              onClick={() => showAddSongForm ? handleAdd(name, url, artistName) : setShowAddSongForm(true)}
+              disabled={showAddSongForm ? buttonDisabled : false}
+            />
+          </div>
         </div>
       </div>
     </Modal>

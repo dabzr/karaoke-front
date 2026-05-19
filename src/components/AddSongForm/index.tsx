@@ -1,6 +1,5 @@
 import { Input } from "../Input";
-import { Button } from "../Button";
-import { strings, addString, songNameString, urlString, cancelString, artistNameString } from '../../utils/strings';
+import { strings, songNameString, urlString, artistNameString } from '../../utils/strings';
 import { language } from '../../utils/settings';
 
 type Props = {
@@ -13,9 +12,6 @@ type Props = {
   url: string;
   setUrl: (value: string) => void;
   urlError: string;
-  buttonDisabled: boolean;
-  handleClose: () => void;
-  handleAdd: () => void;
 }
 
 export function AddSongForm({
@@ -28,9 +24,6 @@ export function AddSongForm({
   url,
   setUrl,
   urlError,
-  buttonDisabled,
-  handleClose,
-  handleAdd,
 }: Props){
   return (
     <>
@@ -56,19 +49,6 @@ export function AddSongForm({
           onChange={setUrl}
           maxLength={30}
           error={urlError}
-        />
-      </div>
-      <div className="bg-gray-400 w-full h-[2px]"></div>
-      <div className="flex justify-between w-full mt-2">
-        <Button
-          label={strings[language][cancelString]} 
-          onClick={handleClose}
-          disabled={buttonDisabled}
-        />
-        <Button 
-          label={strings[language][addString]}
-          onClick={handleAdd}
-          disabled={buttonDisabled}
         />
       </div>
     </>
