@@ -8,6 +8,7 @@ import { language, url } from "../utils/settings";
 import { joinRoute } from "../utils/routes";
 import * as QRCode from 'qrcode';
 import { useQueue } from "./useQueue";
+import { useUsers } from "./useUsers";
 
 export function useHostRoom() {
   const { id } = useParams();
@@ -19,6 +20,7 @@ export function useHostRoom() {
   const [activeButton, setActiveButton] = useState<string>(strings[language][queueString]);
   const [qrCodeUrl, setQrCodeUrl] = useState<string>("");
   const { queue } = useQueue(id ?? "");
+  const { users } = useUsers(id ?? "");
 
   useEffect(() => {
     setIsLoading(true);
@@ -63,5 +65,6 @@ export function useHostRoom() {
     qrCodeUrl,
     isLoading,
     queue,
+    users,
   }
 }

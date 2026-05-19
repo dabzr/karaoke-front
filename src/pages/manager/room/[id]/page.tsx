@@ -6,6 +6,7 @@ import { language } from "../../../../utils/settings";
 import { RoomData } from "../../../../components/RoomData/index";
 import { SongQueue } from "../../../../components/SongQueue/index";
 import { Loading } from "../../../../components/Loading/index";
+import { ApiUser } from "../../../../interfaces/user";
 
 export function ManagerRoomPage() { 
 
@@ -17,6 +18,7 @@ export function ManagerRoomPage() {
     qrCodeUrl,
     isLoading,
     queue,
+    users,
   } = useHostRoom();
 
   if(isLoading) return <Loading/>
@@ -60,7 +62,16 @@ export function ManagerRoomPage() {
             <SongQueue songs={queue}/>
           </div>
         }
-        {activeButton === strings[language][participantsString] && <div></div>}
+        {activeButton === strings[language][participantsString] && 
+          <div className="py-10">
+            {users.map((user: ApiUser) => 
+              <div className="grid grid-cols-1 h-20 items-center text-center border border-gray-200 text-xl">
+                <div>{user.name}</div>
+              </div>
+              )
+            }
+          </div>
+        }
         {activeButton === strings[language][dataString] && 
           <RoomData
             room={room}

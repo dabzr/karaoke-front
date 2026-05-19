@@ -9,3 +9,4 @@ export const roomTopicQueueEndpoint = (code: string) => `/topic/queue${roomEndpo
 export const queueRoomQueueEndpoint = (code: string) => `/queue${roomEndpoint}/${code}/queue`;
 export const queueRoomEndpoint = (code: string) => `/queue${roomEndpoint}/${code}`;
 export const roomManagerEndpoint = (code: string) => `${roomEndpoint}${managerEndpoint}/${code}`;
+export const roomUsersEndpoint = (code: string) => `${roomEndpoint}/${code}`;
