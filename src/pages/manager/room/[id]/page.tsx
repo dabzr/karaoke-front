@@ -1,7 +1,7 @@
 import { Navbar } from "../../../../components/Navbar";
 import { useHostRoom } from "../../../../hooks/useHostRoom";
 import { ButtonGroup } from "../../../../components/ButtonGroup/index";
-import { strings, queueString, participantsString, dataString, roomCodeString, roomNotFoundString } from "../../../../utils/strings";
+import { strings, queueString, participantsString, dataString, roomCodeString, roomNotFoundString, nextString } from "../../../../utils/strings";
 import { language } from "../../../../utils/settings";
 import { RoomData } from "../../../../components/RoomData/index";
 import { SongQueue } from "../../../../components/SongQueue/index";
@@ -19,6 +19,8 @@ export function ManagerRoomPage() {
     isLoading,
     queue,
     users,
+    handleNextSong,
+    nextSong,
   } = useHostRoom();
 
   if(isLoading) return <Loading/>
@@ -78,6 +80,11 @@ export function ManagerRoomPage() {
             handleEdit={handleEdit}
           />
         }
+      </div>
+      <div className="flex justify-center pb-15 shrink-0">
+        <button className="bg-gray-200 p-4 rounded-md shadow-md" onClick={handleNextSong} disabled={queue.length !== 0}>
+          {strings[language][nextString]}
+        </button>
       </div>
     </div>
   );

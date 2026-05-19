@@ -9,6 +9,7 @@ import { joinRoute } from "../utils/routes";
 import * as QRCode from 'qrcode';
 import { useQueue } from "./useQueue";
 import { useUsers } from "./useUsers";
+import { getNextSong } from "../services/queue";
 
 export function useHostRoom() {
   const { id } = useParams();
@@ -21,6 +22,7 @@ export function useHostRoom() {
   const [qrCodeUrl, setQrCodeUrl] = useState<string>("");
   const { queue } = useQueue(id ?? "");
   const { users } = useUsers(id ?? "");
+  const [nextSong, setNextSong] = useState<string>("");
 
   useEffect(() => {
     setIsLoading(true);
@@ -56,6 +58,20 @@ export function useHostRoom() {
       });
   }
 
+  const handleNextSong = () => {
+    setIsLoading(true);
+    getNextSong(id ?? "")
+      .then((data) => {
+        setNextSong(data);
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
   return {
     room,
     navigator,
@@ -66,5 +82,7 @@ export function useHostRoom() {
     isLoading,
     queue,
     users,
+    handleNextSong,
+    nextSong,
   }
 }

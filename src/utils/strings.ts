@@ -47,6 +47,8 @@ export const goToLoginString = "go-to-login";
 export const notHaveAccountYetString = "not-have-account-yet";
 export const createOneString = "create-one";
 export const artistNameString = "artist";
+export const closeString = "close";
+export const nextString = "next";
 
 export const strings: {[locale: string]: {[key: string]: string}} = {
   "pt-br": {
@@ -98,5 +100,7 @@ export const strings: {[locale: string]: {[key: string]: string}} = {
     [notHaveAccountYetString]: "Ainda não possui conta?",
     [createOneString]: "Crie uma",
     [artistNameString]: "Nome do Artista",
+    [closeString]: "Fechar",
+    [nextString]: "Próxima",
   },
 };

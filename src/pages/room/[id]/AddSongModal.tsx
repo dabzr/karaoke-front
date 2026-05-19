@@ -1,15 +1,15 @@
 import Modal from '@mui/material/Modal';
 import { useState } from "react";
-import { youtubeLinkRegex } from "../../../utils/regex";
 import { useParams } from 'react-router-dom';
 import { addSong } from '../../../services/song';
-import { strings, requiredFieldString, youtubeUrlRequired, addSongString, cancelString, addString } from '../../../utils/strings';
-import { AddSongForm } from '../../../components/AddSongForm/index';
+import { strings, addSongString, closeString, } from '../../../utils/strings';
 import { language } from '../../../utils/settings';
 import { Input } from '../../../components/Input';
 import { Button } from '../../../components/Button';
 import { getVideoData } from '../../../services/youtube';
 import { IVideo } from '../../../interfaces/youtube';
+import { truncateString } from '../../../utils/truncateString';
+import { Tooltip } from '@mui/material';
 
 type Props = {
   open: boolean;
@@ -23,46 +23,9 @@ export function AddSongModal({
 
   const { id } = useParams();
   const [name, setName] = useState<string>("");
-  const [nameError, setNameError] = useState<string>("");
-  const [artistName, setArtistName] = useState<string>("");
-  const [artistNameError, setArtistNameError] = useState<string>("");
-  const [url, setUrl] = useState<string>("");
-  const [urlError, setUrlError] = useState<string>("");
-  const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
-  const [showAddSongForm, setShowAddSongForm] = useState<boolean>(false);
   const [videos, setVideos] = useState<IVideo[]>([]);
 
-  const validations = [
-    {
-      condition: () => name === "",
-      error: () => setNameError(strings[language][requiredFieldString]),
-    },
-    {
-      condition: () => url && !(youtubeLinkRegex.test(url)),
-      error: () => setUrlError(strings[language][youtubeUrlRequired]),
-    }
-  ]
-
-  const validate = () => {
-    let hasError = false;
-    setNameError("");
-    setUrlError("");
-    for(const validation of validations) {
-      if(validation.condition()) {
-        hasError = true;
-        validation.error();
-      }
-    }
-    return hasError;
-  }
-
   const handleAdd = (name: string, url: string, artistName: string = "") => {
-    setButtonDisabled(true);
-    const hasError = validate();
-    if(hasError) {
-      setButtonDisabled(false);
-      return;
-    }
     addSong(id ?? "", name, artistName, url)
     .then(() => {
       handleClose();
@@ -70,16 +33,12 @@ export function AddSongModal({
     .catch((err) => {
       console.log(err);
     })
-    .finally(() => {
-      setButtonDisabled(false);
-    })
   }
 
   const handleClose = () => {
     setName("");
-    setUrl("");
+    setVideos([]);
     onClose();
-    setShowAddSongForm(false);
   }
 
   const setData = (index: number) => {
@@ -91,7 +50,7 @@ export function AddSongModal({
   }
 
   const searchVideos = () => {
-    getVideoData(name)
+    getVideoData(name.toLowerCase())
       .then((data) => {
         setVideos(data);
       })
@@ -104,71 +63,48 @@ export function AddSongModal({
     <Modal open={open} onClose={onClose}>
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] bg-white border-2 border-gray-100 p-2 max-h-[90vh] overflow-y-auto">
         <div className="flex flex-col justify-center items-center w-full">
-          <div className="p-2 text-xl">{strings[language][addSongString]}</div>
+          <div className="flex w-full items-center justify-center p-2">
+            <span className="text-xl flex-1">{strings[language][addSongString]}</span>
+            <Tooltip title={strings[language][closeString]}>
+              <button onClick={handleClose}>X</button>
+            </Tooltip>
+          </div>
           <div className="bg-gray-400 w-full h-[2px]"></div>
-          {showAddSongForm 
-            ?
-            <AddSongForm
-              name={name}
-              setName={(value: string) => setName(value)}
-              nameError={nameError}
-              artistName={artistName}
-              setArtistName={(value: string) => setArtistName(value)}
-              artistNameError={artistNameError}
-              url={url}
-              setUrl={(value: string) => setUrl(value)}
-              urlError={urlError}
-            />
-            :
-            <div>
-              <div className="flex flex-col">
-                <div className="flex flex-row items-center gap-2">
-                  <div>
-                    <Input
-                      label={"Pesquisar música"}
-                      value={name}
-                      onChange={(value: string) => {
-                        setVideos([]);
-                        setName(value)
-                      }}
-                      required={true}
-                    />
-                  </div>
-                  <Button
-                    label="Pesquisar"
-                    disabled={name === ""}
-                    onClick={searchVideos}
+            <div className="flex flex-col">
+              <div className="flex flex-row items-center gap-2">
+                <div>
+                  <Input
+                    label={"Pesquisar música"}
+                    value={name}
+                    onChange={(value: string) => {
+                      setVideos([]);
+                      setName(value)
+                    }}
+                    required={true}
                   />
                 </div>
-                <div>
-                  {videos.map((video, index) => 
-                    <div className="flex gap-2 items-center">
-                      <button onClick={() => setData(index)}>
-                        <img src={video.thumbnailUrl}></img>
-                      </button>
-                      <button className="flex flex-col" onClick={() => setData(index)}>
-                        <span>{video.title}</span>
-                        <span>{video.channelTitle}</span>
-                      </button>
-                    </div>
-                  )}
-                </div>
+                <Button
+                  label="Pesquisar"
+                  disabled={name === ""}
+                  onClick={searchVideos}
+                />
               </div>
             </div>
-          }
-          <div className="bg-gray-400 w-full h-[2px]"></div>
-          <div className="flex justify-between w-full mt-2">
-            <Button
-              label={strings[language][cancelString]} 
-              onClick={handleClose}
-              disabled={buttonDisabled}
-            />
-            <Button 
-              label={showAddSongForm ? strings[language][addString] : "Adicionar manualmente"}
-              onClick={() => showAddSongForm ? handleAdd(name, url, artistName) : setShowAddSongForm(true)}
-              disabled={showAddSongForm ? buttonDisabled : false}
-            />
-          </div>
+            <div className="pb-2">
+              {videos.map((video, index) => 
+                <div className="flex items-center gap-2 pb-2">
+                  <button className="h-10 w-20" onClick={() => setData(index)}>
+                    <img className="h-full w-full object-contain" src={video.thumbnailUrl}></img>
+                  </button>
+                  <Tooltip title={video.title}>
+                    <button className="flex-1 flex flex-col items-center align-center" onClick={() => setData(index)}>
+                      <span>{truncateString(video.title, 30)}</span>
+                      <span>{truncateString(video.channelTitle, 30)}</span>
+                    </button>
+                  </Tooltip>
+                </div>
+              )}
+            </div>
         </div>
       </div>
     </Modal>
