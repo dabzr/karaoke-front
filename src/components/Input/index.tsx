@@ -29,9 +29,9 @@ export function Input({
   
   return (
     <>
-      <div className={`${error === "" ? "" : "text-red-500"}`}>{label} {required ? " *" : " (Opcional)"}</div>
+      <div className={`${error === "" ? "" : "text-red-500"} font-bold`}>{label} {required ? "" : " (Opcional)"}</div>
       <input 
-        className={`border-2 border-gray-300 rounded-lg p-2 w-full ${error === "" ? "" : "border-red-500"} ${disabled ? "bg-gray-300" : ""}`}
+        className={`border-2 border-gray-300 rounded-lg px-4 min-h-10 w-full ${error === "" ? "" : "border-red-500"} ${disabled ? "bg-gray-300" : ""}`}
         value={value}
         onChange={(e) => handleChange(e.target.value)}
         placeholder={placeholder}

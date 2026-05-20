@@ -33,11 +33,11 @@ export function PasswordInput({
   };
 
   return (
-    <>
-      <div className={`${error === "" ? "" : "text-red-500"}`}>{label} {required ? " *" : " (Opcional)"}</div>
+    <div className="flex flex-col gap-1">
+      <div className={`${error === "" ? "" : "text-red-500"} font-bold`}>{label} {required ? "" : " (Opcional)"}</div>
       <div className="relative flex items-center w-full">
         <input 
-          className={`border-2 border-gray-300 rounded-lg p-2 w-full ${error === "" ? "" : "border-red-500"} ${disabled ? "bg-gray-300" : ""}`}
+          className={`border-2 border-gray-300 rounded-lg px-4 min-h-10 w-full ${error === "" ? "" : "border-red-500"} ${disabled ? "bg-gray-300" : ""}`}
           type={visibility ? "text" : "password"}
           value={value}
           required
@@ -50,6 +50,6 @@ export function PasswordInput({
         </button>
       </div>
       <div className="min-h-[25px] max-h-[25px] text-red-500">{error}</div>
-    </>
+    </div>
   );
 }

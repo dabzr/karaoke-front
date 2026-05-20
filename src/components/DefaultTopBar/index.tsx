@@ -1,29 +1,19 @@
 import { TopBar } from "../TopBar/index";
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import LoginIcon from '@mui/icons-material/Login';
-import { Tooltip } from "@mui/material";
 import { strings, loginString, createAccountString } from "../../utils/strings";
 import { language } from "../../utils/settings";
 import { loginRoute, registerRoute } from "../../utils/routes";
-import { useNavigate } from "react-router-dom";
 
 export function DefaultTopBar() {
 
-  const navigator = useNavigate();
-
   return (
     <TopBar>
-      <div className="flex justify-between w-20">
-        <button className="cursor-pointer" onClick={() => navigator(loginRoute)}>
-          <Tooltip title={strings[language][loginString]}>
-            <LoginIcon/>
-          </Tooltip>
-        </button>
-        <button className="cursor-pointer" onClick={() => navigator(registerRoute)}>
-          <Tooltip title={strings[language][createAccountString]}>
-            <PersonAddIcon/>
-          </Tooltip>
-        </button>
+      <div className="flex items-center">
+        <a className="cursor-pointer block ml-2.5 font-bold text-sm" href={loginRoute}>
+          <span>{strings[language][loginString]}</span>
+        </a>
+        <a className="cursor-pointer block ml-2.5 font-bold text-sm" href={registerRoute}>
+          <span>{strings[language][createAccountString]}</span>
+        </a>
       </div>
     </TopBar>
   );

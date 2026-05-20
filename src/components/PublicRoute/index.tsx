@@ -16,7 +16,7 @@ export function PublicRoute({
 
   if(isLoading) return <Loading/>
   
-  if(host) return <Navigate to={host.code ? `${managerRoomRoute}/${host.code}` : `${roomsRoute}}`} replace/>
+  if(host) return <Navigate to={host.code ? `${managerRoomRoute}/${host.code}` : `${roomsRoute}`} replace/>
 
   logout();
   return (

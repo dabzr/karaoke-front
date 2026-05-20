@@ -52,6 +52,9 @@ export function useLogin() {
       })
       .catch((error) => {
         const errorMessage = error.response.data.message;
+        if(errorMessage === "This manager has no room") {
+          navigator(`${roomsRoute}`);
+        }
         setError(strings[language][errorMessage]);
       })
       .finally(() => {
