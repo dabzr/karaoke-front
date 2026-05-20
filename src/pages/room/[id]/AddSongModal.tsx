@@ -45,7 +45,7 @@ export function AddSongModal({
     if(videos.length === 0) return;
     if(index >= videos.length) return;
     const video = videos[index];
-    handleAdd(video.title, "https://youtu.be/" + video.id);
+    handleAdd(video.title, video.id);
     setVideos([]);
   }
 

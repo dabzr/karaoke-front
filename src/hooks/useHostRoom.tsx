@@ -22,7 +22,6 @@ export function useHostRoom() {
   const [qrCodeUrl, setQrCodeUrl] = useState<string>("");
   const { queue } = useQueue(id ?? "");
   const { users } = useUsers(id ?? "");
-  const [nextSong, setNextSong] = useState<string>("");
 
   useEffect(() => {
     setIsLoading(true);
@@ -62,7 +61,7 @@ export function useHostRoom() {
     setIsLoading(true);
     getNextSong(id ?? "")
       .then((data) => {
-        setNextSong(data);
+        navigator("/video/" + data)
       })
       .catch((err) => {
         setError(err);
@@ -83,6 +82,5 @@ export function useHostRoom() {
     queue,
     users,
     handleNextSong,
-    nextSong,
   }
 }

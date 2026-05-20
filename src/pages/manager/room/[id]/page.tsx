@@ -20,7 +20,6 @@ export function ManagerRoomPage() {
     queue,
     users,
     handleNextSong,
-    nextSong,
   } = useHostRoom();
 
   if(isLoading) return <Loading/>
@@ -82,7 +81,7 @@ export function ManagerRoomPage() {
         }
       </div>
       <div className="flex justify-center pb-15 shrink-0">
-        <button className="bg-gray-200 p-4 rounded-md shadow-md" onClick={handleNextSong} disabled={queue.length !== 0}>
+        <button className="bg-gray-200 p-4 rounded-md shadow-md" onClick={handleNextSong} disabled={queue.length === 0}>
           {strings[language][nextString]}
         </button>
       </div>
