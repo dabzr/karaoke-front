@@ -14,12 +14,12 @@ export function DefaultTopBar() {
   return (
     <TopBar>
       <div className="flex justify-between w-20">
-        <button onClick={() => navigator(loginRoute)}>
+        <button className="cursor-pointer" onClick={() => navigator(loginRoute)}>
           <Tooltip title={strings[language][loginString]}>
             <LoginIcon/>
           </Tooltip>
         </button>
-        <button onClick={() => navigator(registerRoute)}>
+        <button className="cursor-pointer" onClick={() => navigator(registerRoute)}>
           <Tooltip title={strings[language][createAccountString]}>
             <PersonAddIcon/>
           </Tooltip>

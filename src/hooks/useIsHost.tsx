@@ -15,7 +15,7 @@ export function useIsHost() {
         setHost(res);
       })
       .catch((err) => {
-        if(err.response.data.message === "This manager has no room") {
+        if(err.response && err.response.data.message === "This manager has no room") {
           setHost({
             "is_premium": false,
             "max_room_size": 5,

@@ -36,7 +36,7 @@ export function RegisterPage() {
         <DefaultTopBar/>
         <div className="flex justify-center items-center p-4 t-56 w-full z-90 flex-col min-h-screen">
           <div className="fixed left-4 z-110 top-16 justify-start">
-            <button onClick={returnPage} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+            <button onClick={returnPage} className="p-2 hover:bg-gray-100 rounded-full transition-colors cursor-pointer">
               <Tooltip title={strings[language][backString]}>
                 <ArrowBackIcon/>
               </Tooltip>
