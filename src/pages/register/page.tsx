@@ -42,54 +42,56 @@ export function RegisterPage() {
               </Tooltip>
             </button>
           </div>
-          <div className="flex flex-col items-center w-full max-w-102 m-0">
-            <div className="flex flex-col w-100 justify-center items-center shadow-md rounded-sm">
-              <div className="flex flex-col justify-start p-6 w-full">
-                <h1 className="text-[1.25rem] self-start font-bold leading-6">Criar Conta</h1>
-                <div className="flex flex-col justify-start w-full grow shrink basis-[0%]">
-                  <div className="mt-6 mb-4 mx-0">
-                    <Input
-                      label={"Email"}
-                      required
-                      onChange={(value) => setEmail(value)}
-                      value={email}
-                      maxLength={100}
-                      error={emailError}
-                    />
-                    <PasswordInput
-                      label={"Senha"}
-                      required
-                      onChange={(value) => changePassword(value)}
-                      value={password}
-                      maxLength={100}
-                      error={passwordError}
-                    />
-                    <PasswordInput
-                      label={"Confirmar Senha"}
-                      required
-                      onChange={(value) => verifyConfirmPassword(value)}
-                      value={confirmPassword}
-                      maxLength={100}
-                      error={confirmPasswordError}
-                    />
+          <div className="flex flex-col w-100 justify-center items-center shadow-md rounded-sm">
+            <div className="flex flex-col items-center w-full max-w-102 m-0">
+              <div className="flex flex-col w-100 justify-center items-center shadow-md rounded-sm">
+                <div className="flex flex-col justify-start p-6 w-full">
+                  <h1 className="text-[1.25rem] self-start font-bold leading-6">Criar Conta</h1>
+                  <div className="flex flex-col justify-start w-full grow shrink basis-[0%]">
+                    <div className="mt-6 mb-4 mx-0">
+                      <Input
+                        label={"Email"}
+                        required
+                        onChange={(value) => setEmail(value)}
+                        value={email}
+                        maxLength={100}
+                        error={emailError}
+                      />
+                      <PasswordInput
+                        label={"Senha"}
+                        required
+                        onChange={(value) => changePassword(value)}
+                        value={password}
+                        maxLength={100}
+                        error={passwordError}
+                      />
+                      <PasswordInput
+                        label={"Confirmar Senha"}
+                        required
+                        onChange={(value) => verifyConfirmPassword(value)}
+                        value={confirmPassword}
+                        maxLength={100}
+                        error={confirmPasswordError}
+                      />
+                    </div>
+                    <div className="flex flex-col gap-5 w-full justify-center">
+                      <Button
+                        label={strings[language][createAccountString]}
+                        onClick={() => handleLogin()}
+                        disabled={isLoading || password !== confirmPassword}
+                      />
+                      <p>
+                        {strings[language][alreadyHasAccountString]}&nbsp;
+                        <a href={`${url + loginRoute}`} className="underline font-bold">
+                          {strings[language][loginString]}
+                        </a>
+                      </p>
                   </div>
-                  <div className="flex flex-col gap-5 w-full justify-center">
-                    <Button
-                      label={strings[language][createAccountString]}
-                      onClick={() => handleLogin()}
-                      disabled={isLoading || password !== confirmPassword}
-                    />
-                    <p>
-                      {strings[language][alreadyHasAccountString]}&nbsp;
-                      <a href={`${url + loginRoute}`} className="underline font-bold">
-                        {strings[language][loginString]}
-                      </a>
-                    </p>
-                </div>
+                  </div>
                 </div>
               </div>
             </div>
-        </div>
+          </div>
         </div>
       </div>
     </div>
