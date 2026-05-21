@@ -9,17 +9,22 @@ type Props = {
 }
 
 export function SongItem({ song, index }: Props) {
-  const normalizedString = replaceCaseSensitive(song.name, "karaoke");
-
   return (
-    <div className="grid grid-cols-3 h-20 items-center text-center border border-gray-200 text-xl">
-      <div>{`${index + 1}°`}</div>
-      <div className="flex flex-col">
-        <Tooltip title={normalizedString}>
-          <div>{truncateString(normalizedString, 30)}</div>
+    <div className="grid grid-cols-3 min-h-20 py-3 items-center text-center border-b border-gray-200 text-base md:text-lg">
+      <div className="font-medium">{`${index + 1}°`}</div>
+      
+      <div className="flex flex-col justify-center min-w-0 px-1">
+        <Tooltip title={song.name}>
+          <div className="truncate font-semibold text-gray-900">
+            {song.name}
+          </div>
+          <div className="truncate text-sm text-gray-500 mt-0.5">
+            {song.artistName || "-"}
+          </div>
         </Tooltip>
       </div>
-      <div>{song.user.name}</div>
+      
+      <div className="truncate px-1 text-gray-700">{song.user.name}</div>
     </div>
   );
 }

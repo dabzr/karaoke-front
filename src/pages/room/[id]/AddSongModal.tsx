@@ -26,20 +26,21 @@ export function AddSongModal({
   const [videos, setVideos] = useState<IVideo[]>([]);
   const inputRef = useRef(null);
 
-  const handleAdd = (name: string, url: string, artistName: string = "") => {
-    addSong(id ?? "", name, artistName, url)
+  const handleAdd = (name: string, url: string) => {
+    addSong(id ?? "", name, url)
     .then(() => {
-      handleClose();
+      handleClose(true);
     })
     .catch((err) => {
       console.log(err);
     })
   }
 
-  const handleClose = () => {
+  const handleClose = (clearVideos: boolean = false) => {
     setName("");
     setVideos([]);
     onClose();
+    if(clearVideos) setVideos([]);
   }
 
   const setData = (index: number) => {
@@ -47,7 +48,6 @@ export function AddSongModal({
     if(index >= videos.length) return;
     const video = videos[index];
     handleAdd(video.title, video.id);
-    setVideos([]);
   }
 
   const searchVideos = () => {
