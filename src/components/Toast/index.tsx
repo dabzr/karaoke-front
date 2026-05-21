@@ -18,6 +18,7 @@ export function Toast({
       autoHideDuration={5000} 
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       onClose={handleCloseError}
+      sx={{ marginTop: "50px" }}
     >
       <Alert variant="filled" severity={severity} sx={{ width: '100%' }} onClose={handleCloseError}>
         {error}

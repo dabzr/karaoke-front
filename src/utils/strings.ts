@@ -1,5 +1,4 @@
 
-export const roomsTitleString = "rooms-title";
 export const defaultAvatarString = "default-avatar";
 export const addRoomString = "add-room";
 export const goToRoomString = "go-to-room";
@@ -51,7 +50,6 @@ export const nextString = "next";
 
 export const strings: {[locale: string]: {[key: string]: string}} = {
   "pt-br": {
-    [roomsTitleString]: "Suas Salas",
     [defaultAvatarString]: "Você",
     [addRoomString]: "Adicionar Sala",
     [goToRoomString]: "Ir para sala",

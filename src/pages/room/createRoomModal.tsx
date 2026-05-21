@@ -38,7 +38,7 @@ export function CreateRoomModal({
 
   const validations = [
     {
-      "condition": () => name === "", 
+      "condition": () => name.trim() === "", 
       "error": () => setNameError(strings[language][requiredFieldString])
     },
     {

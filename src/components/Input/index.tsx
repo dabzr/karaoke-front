@@ -9,6 +9,8 @@ type Props = {
   error?: string;
   disabled?: boolean;
   type?: string;
+  inputMode?: string;
+  ref?: any;
 };
 
 export function Input({
@@ -21,6 +23,8 @@ export function Input({
   error = "",
   disabled = false,
   type = "text",
+  inputMode = "",
+  ref,
 }: Props) {
 
   const handleChange = (newValue: string) => {
@@ -37,6 +41,8 @@ export function Input({
         placeholder={placeholder}
         disabled={disabled}
         type={type}
+        inputMode={inputMode}
+        ref={ref}
       >
       </input>
       <div className="min-h-[25px] max-h-[25px] text-red-500">{error}</div>

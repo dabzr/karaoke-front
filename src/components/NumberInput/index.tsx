@@ -25,7 +25,7 @@ export function NumberInput({
 }: Props) {
 
   const handleChange = (newValue: string) => {
-    if(newValue === ""){
+    if(newValue.trim() === ""){
       onChange(null);
       return;
     }

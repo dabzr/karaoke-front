@@ -33,7 +33,7 @@ export function RegisterPage() {
   return (
     <div className="flex flex-col h-full"> 
       <TopBar/>
-      <div className="flex justify-center items-center p-4 top-14 w-full z-90 flex-col min-h-[calc(100vh-52px)]">
+      <div className="flex justify-center items-center p-4 top-56 w-full z-90 flex-col min-h-[calc(100vh-56px)]">
         <div className="fixed left-4 z-110 top-16 justify-start">
           <button onClick={returnPage} className="p-2 hover:bg-gray-100 rounded-full transition-colors cursor-pointer">
             <Tooltip title={strings[language][backString]}>

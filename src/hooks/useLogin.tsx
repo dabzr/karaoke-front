@@ -16,11 +16,11 @@ export function useLogin() {
 
   const validations = [
     {
-      "condition": () => email === "",
+      "condition": () => email.trim() === "",
       "error": () => setEmailError(strings[language][requiredFieldString])
     },
     {
-      "condition": () => password === "",
+      "condition": () => password.trim() === "",
       "error": () => setPasswordError(strings[language][requiredFieldString])
     },
   ]

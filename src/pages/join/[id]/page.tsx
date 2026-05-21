@@ -3,10 +3,8 @@ import { PasswordInput } from "../../../components/PasswordInput/index";
 import { Input } from "../../../components/Input/index";
 import { Button } from "../../../components/Button/index";
 import { useJoinId } from "../../../hooks/useJoinId";
-import { strings, enterString, roomNotFoundString, writePasswordString, writeNameString, backString } from "../../../utils/strings";
+import { strings, enterString, roomNotFoundString, writePasswordString, writeNameString } from "../../../utils/strings";
 import { language } from "../../../utils/settings";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Tooltip } from "@mui/material";
 
 export function JoinIdPage() {
 
@@ -21,7 +19,6 @@ export function JoinIdPage() {
     handlePassword,
     handleEnter, 
     error,
-    returnPage,
   } = useJoinId();
 
   if(!roomInfo) {
@@ -57,28 +54,23 @@ export function JoinIdPage() {
           </div>
         </div>
         :
-        <div className="flex flex-col h-screen">
-          <div className="flex justify-start">
-            <button onClick={returnPage} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <Tooltip title={strings[language][backString]}>
-                <ArrowBackIcon/>
-              </Tooltip>
-            </button>
-          </div>
-          <div className="flex flex-1 flex-col items-center justify-center">
-            <div className="flex flex-col w-60">
-              <Input
-                label={strings[language][writeNameString]}
-                required
-                onChange={(value) => setName(value)}
-                value={name}
-                maxLength={10}
-              />
-              <Button
-                label={strings[language][enterString]}
-                onClick={() => handleEnter()}
-                disabled={isLoading}
-              />
+        <div className="flex justify-center items-center p-4 top-56 z-90 flex-col min-h-[calc(100vh-56px)]">
+          <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col max-w-[320px] mt-0 mx-6 mb-5 justify-start w-full grow shrink basis-[0%] bg-gray-100 p-4 rounded-sm shadow-black">
+              <div className="flex flex-col justify-items items-center">
+                <Input
+                  label={strings[language][writeNameString]}
+                  required
+                  onChange={(value) => setName(value)}
+                  value={name}
+                  maxLength={10}
+                />
+                <Button
+                  label={strings[language][enterString]}
+                  onClick={() => handleEnter()}
+                  disabled={isLoading}
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -34,7 +34,7 @@ export function useJoinId() {
   }, [])
 
   const validatePassword = () => {
-    if(password === "") {
+    if(password.trim() === "") {
       setError(strings[language][requiredFieldString]);
       return;
     }
@@ -78,6 +78,5 @@ export function useJoinId() {
     handlePassword,
     handleEnter,
     error,
-    returnPage,
   }
 }

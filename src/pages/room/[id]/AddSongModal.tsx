@@ -1,15 +1,15 @@
 import Modal from '@mui/material/Modal';
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useParams } from 'react-router-dom';
 import { addSong } from '../../../services/song';
 import { strings, addSongString, closeString, } from '../../../utils/strings';
 import { language } from '../../../utils/settings';
 import { Input } from '../../../components/Input';
-import { Button } from '../../../components/Button';
 import { getVideoData } from '../../../services/youtube';
 import { IVideo } from '../../../interfaces/youtube';
 import { truncateString } from '../../../utils/truncateString';
 import { Tooltip } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 type Props = {
   open: boolean;
@@ -24,6 +24,7 @@ export function AddSongModal({
   const { id } = useParams();
   const [name, setName] = useState<string>("");
   const [videos, setVideos] = useState<IVideo[]>([]);
+  const inputRef = useRef(null);
 
   const handleAdd = (name: string, url: string, artistName: string = "") => {
     addSong(id ?? "", name, artistName, url)
@@ -50,13 +51,30 @@ export function AddSongModal({
   }
 
   const searchVideos = () => {
-    getVideoData(name.toLowerCase())
+    const cleanedText = name.trim().toLowerCase();
+    event.preventDefault();
+    if(!cleanedText) {
+      openKeyboard();
+      return;
+    }
+    closeKeyboard();
+    getVideoData(cleanedText)
       .then((data) => {
         setVideos(data);
       })
       .catch((err) => {
         console.log(err);
       })
+  }
+
+  const openKeyboard = () => {
+    if(!inputRef.current) return;
+    inputRef.current.focus();
+  }
+
+  const closeKeyboard = () => {
+    if(!inputRef.current) return;
+    inputRef.current.blur();
   }
 
   return (
@@ -71,7 +89,7 @@ export function AddSongModal({
           </div>
           <div className="bg-gray-400 w-full h-[2px]"></div>
             <div className="flex flex-col">
-              <div className="flex flex-row items-center gap-2">
+              <form className="flex flex-row items-center gap-2" onSubmit={searchVideos}>
                 <div>
                   <Input
                     label={"Pesquisar música"}
@@ -81,14 +99,14 @@ export function AddSongModal({
                       setName(value)
                     }}
                     required={true}
+                    inputMode={"text"}
+                    ref={inputRef}
                   />
                 </div>
-                <Button
-                  label="Pesquisar"
-                  disabled={name === ""}
-                  onClick={searchVideos}
-                />
-              </div>
+                <button type="submit">
+                  <SearchIcon/>
+                </button>
+              </form>
             </div>
             <div className="pb-2">
               {videos.map((video, index) => 

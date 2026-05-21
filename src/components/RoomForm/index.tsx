@@ -66,45 +66,41 @@ export function RoomForm({
   }
 
   return (
-    <div className="flex flex-col items-center w-full h-full justify-between">
-      <div className="w-full text-center flex-auto">
-        <div className="p-2 text-xl">{title}</div>
-        <div className="bg-gray-400 w-full h-[2px]"></div>
-      </div>
-      <div className="flex-auto w-full max-w-100 items-center">
-        <Input
-          label={strings[language][nameString]}
-          value={name}
-          onChange={setName}
-          placeholder={strings[language][namePlaceholderString]}
-          required
-          maxLength={50}
-          error={nameError}
-          disabled={nameDisabled}
-        />
-        <PasswordInput
-          label={strings[language][passwordString]} 
-          value={password}
-          onChange={setPassword}
-          maxLength={30}
-          disabled={passwordDisabled}
-        />
-        <NumberInput
-          label={strings[language][maxQuantityString]}
-          value={maxQuantity === null ? "" : String(maxQuantity)}
-          onChange={setMaxQuantity}
-          placeholder={strings[language][maxQuantityPlaceholderString]}
-          required
-          min={1}
-          max={1000}
-          error={maxQuantityError}
-          disabled={maxQuantityDisabled}
-        />
-        {children && <>{children}</>}
-      </div>
-      <div className="w-full flex-auto">
-        <div className="bg-gray-400 w-full h-[2px]"></div>
-        <div className="flex justify-between w-full mt-2">
+    <div className="flex flex-col justify-start p-6 w-full">
+      <h1 className="text-[1.25rem] self-start font-bold leading-6">{title}</h1>
+      <div className="flex flex-col justify-start w-full grow shrink basis-[0%]">
+        <div className="mt-6 mb-4 mx-0">
+          <Input
+            label={strings[language][nameString]}
+            value={name}
+            onChange={setName}
+            placeholder={strings[language][namePlaceholderString]}
+            required
+            maxLength={50}
+            error={nameError}
+            disabled={nameDisabled}
+          />
+          <PasswordInput
+            label={strings[language][passwordString]} 
+            value={password}
+            onChange={setPassword}
+            maxLength={30}
+            disabled={passwordDisabled}
+          />
+          <NumberInput
+            label={strings[language][maxQuantityString]}
+            value={maxQuantity === null ? "" : String(maxQuantity)}
+            onChange={setMaxQuantity}
+            placeholder={strings[language][maxQuantityPlaceholderString]}
+            required
+            min={1}
+            max={1000}
+            error={maxQuantityError}
+            disabled={maxQuantityDisabled}
+          />
+          {children && <>{children}</>}
+        </div>
+        <div className="flex gap-5 w-full justify-center">
           <Button
             label={strings[language][cancelString]} 
             onClick={handleClose}

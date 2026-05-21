@@ -53,7 +53,7 @@ export function RoomData({
 
   const validations = [
     {
-      "condition": () => name === "", 
+      "condition": () => name.trim() === "", 
       "error": () => setNameError(strings[language][requiredFieldString])
     },
     {
