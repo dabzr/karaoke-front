@@ -1,5 +1,5 @@
 import { useVideo } from "../../../hooks/useVideo";
-import { DefaultTopBar } from "../../../components/DefaultTopBar";
+import { TopBar } from "../../../components/TopBar";
 import { backString, strings } from "../../../utils/strings";
 import { language } from "../../../utils/settings";
 import { Tooltip } from "@mui/material";
@@ -15,7 +15,7 @@ export function VideoPage() {
   return (
     <div className="fixed inset-0 flex flex-col py-14 h-screen overflow-hidden">
       <div className="flex p-2">
-        <DefaultTopBar/>
+        <TopBar/>
         <div className="flex justify-start">
           <button onClick={returnPage} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
             <Tooltip title={strings[language][backString]}>

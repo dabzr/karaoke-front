@@ -1,4 +1,4 @@
-import { Navbar } from "../../../components/Navbar";
+import { TopBar } from "../../../components/TopBar";
 import { strings, roomNotFoundString, addSongString } from "../../../utils/strings";
 import { language } from "../../../utils/settings";
 import { useUserRoom } from "../../../hooks/useUserRoom";
@@ -23,7 +23,7 @@ export function RoomPage() {
   if(!room) {
     return (
       <div className="flex flex-col p-14 min-h-screen"> 
-        <Navbar/>
+        <TopBar/>
         <div className="flex flex-col items-center h-screen justify-center">
           {strings[language][roomNotFoundString]}
         </div>
@@ -33,7 +33,7 @@ export function RoomPage() {
 
   return (
     <div className="fixed inset-0 flex flex-col py-14 h-screen overflow-hidden"> 
-      <Navbar onClick={() => goToProfilePage()}/>
+      <TopBar/>
       <div className="flex items-center justify-center text-[1cm] mx-20 h-20">
         <div>
           {room.name}
