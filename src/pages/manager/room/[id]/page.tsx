@@ -1,12 +1,15 @@
 import { Navbar } from "../../../../components/Navbar";
 import { useHostRoom } from "../../../../hooks/useHostRoom";
 import { ButtonGroup } from "../../../../components/ButtonGroup/index";
-import { strings, queueString, participantsString, dataString, roomCodeString, roomNotFoundString, nextString } from "../../../../utils/strings";
+import { strings, queueString, participantsString, dataString, roomCodeString, roomNotFoundString, nextString, songString, positionString, singerString, removeString} from "../../../../utils/strings";
 import { language } from "../../../../utils/settings";
 import { RoomData } from "../../../../components/RoomData/index";
 import { SongQueue } from "../../../../components/SongQueue/index";
 import { Loading } from "../../../../components/Loading/index";
 import { ApiUser } from "../../../../interfaces/user";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Tooltip } from "@mui/material";
+import { SongItem } from "../../../../components/SongItem/index";
 
 export function ManagerRoomPage() { 
 
@@ -20,6 +23,7 @@ export function ManagerRoomPage() {
     queue,
     users,
     handleNextSong,
+    handleRemoveSong,
   } = useHostRoom();
 
   if(isLoading) return <Loading/>
@@ -60,7 +64,31 @@ export function ManagerRoomPage() {
       <div className="flex flex-col bg-gray-50 shadow-md mx-20 mb-5 px-20 overflow-y-auto h-180">
         {activeButton === strings[language][queueString] && 
           <div className="py-10">
-            <SongQueue songs={queue}/>
+            <SongQueue 
+              songs={queue} 
+              header={[
+                strings[language][positionString],
+                strings[language][songString],
+                strings[language][singerString],
+                strings[language][removeString]
+              ]}
+              generateSongItem={(song, index) => {
+                return <SongItem 
+                  song={song} 
+                  index={index} 
+                  children={
+                    <div>
+                      <button onClick={() => handleRemoveSong(song.id)}>
+                        <Tooltip title={strings[language][removeString]}>
+                          <DeleteIcon/>
+                        </Tooltip>
+                      </button>
+                    </div>
+                  }
+                  className={"grid-cols-4"}
+                />
+              }}
+            />
           </div>
         }
         {activeButton === strings[language][participantsString] && 

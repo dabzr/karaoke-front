@@ -9,7 +9,7 @@ import { joinRoute } from "../utils/routes";
 import * as QRCode from 'qrcode';
 import { useQueue } from "./useQueue";
 import { useUsers } from "./useUsers";
-import { getNextSong } from "../services/queue";
+import { getNextSong, deleteSong } from "../services/queue";
 
 export function useHostRoom() {
   const { id } = useParams();
@@ -71,6 +71,18 @@ export function useHostRoom() {
       });
   }
 
+  const handleRemoveSong = (songId: string) => {
+    setIsLoading(true);
+    deleteSong(id, songId)
+      .then(() => {})
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
   return {
     room,
     navigator,
@@ -82,5 +94,6 @@ export function useHostRoom() {
     queue,
     users,
     handleNextSong,
+    handleRemoveSong,
   }
 }

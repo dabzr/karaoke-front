@@ -1,6 +1,7 @@
 import { ApiUser } from "./user";
 
 export interface ISong {
+  id: string;
   name: string;
   artist?: string;
   url?: string;
