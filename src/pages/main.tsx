@@ -20,7 +20,6 @@ export const RoutesPages = () => {
         <Route path={loginRoute} element={<PublicRoute Component={LoginPage}/>} />
         <Route path={registerRoute} element={<PublicRoute Component={RegisterPage}/>} />
         <Route path={roomsRoute} element={<ProtectedRoute Component={RoomsPage}></ProtectedRoute>} />
-        <Route path={roomsRoute} element={<ProtectedRoute Component={RoomsPage}></ProtectedRoute>} />
         <Route path={managerRoomRoute + "/:id"} element={<ManagerRoomPage/>} />
         <Route path={roomRoute + "/:id"} element={<RoomPage/>} />
         <Route path={joinRoute} element={<PublicRoute Component={JoinPage}/>} />

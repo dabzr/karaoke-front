@@ -24,6 +24,7 @@ export function RoomData({
   const [maxQuantity, setMaxQuantity] = useState<number | null>(null);
   const [maxQuantityError, setMaxQuantityError] = useState<string>("");
   const [onEdit, setOnEdit] = useState<boolean>(false);
+  const [timeoutTime, setTimeoutTime] = useState<number | null>(null);
 
   useEffect(() => {
     if(!room) return;
@@ -89,6 +90,9 @@ export function RoomData({
         validations={validations}
         successButtonText={strings[language][editString]}
         buttonDisabled={!onEdit}
+        timeoutTimeDisabled={!onEdit}
+        timeoutTime={timeoutTime}
+        setTimeoutTime={setTimeoutTime}
       >
         <Input
           label={strings[language][roomCodeString]}

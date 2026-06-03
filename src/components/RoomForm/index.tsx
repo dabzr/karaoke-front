@@ -1,6 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import { language } from "../../utils/settings";
-import { cancelString, maxQuantityPlaceholderString, maxQuantityString, namePlaceholderString, nameString, passwordString, strings } from "../../utils/strings";
+import { cancelString, maxQuantityPlaceholderString, maxQuantityString, namePlaceholderString, nameString, passwordString, strings, timeoutString } from "../../utils/strings";
 import { Button } from "../Button";
 import { Input } from "../Input";
 import { NumberInput } from "../NumberInput";
@@ -25,6 +25,8 @@ type Props = {
   successButtonText: string;
   children?: ReactNode;
   buttonDisabled?: boolean;
+  timeoutTime: number | null;
+  setTimeoutTime: Dispatch<SetStateAction<number | null>>;
 }
 
 export function RoomForm({
@@ -46,6 +48,9 @@ export function RoomForm({
   successButtonText,
   children,
   buttonDisabled = false,
+  timeoutTime,
+  setTimeoutTime,
+  timeoutTimeDisabled = false,
 }: Props) {
 
   const validateErrors = () => {
@@ -97,6 +102,16 @@ export function RoomForm({
             max={1000}
             error={maxQuantityError}
             disabled={maxQuantityDisabled}
+          />
+          <NumberInput
+            label={strings[language][timeoutString]}
+            value={timeoutTime === null ? "" : String(timeoutTime)}
+            onChange={setTimeoutTime}
+            placeholder={"1-10"}
+            required
+            min={1}
+            max={10}
+            disabled={timeoutTimeDisabled}
           />
           {children && <>{children}</>}
         </div>

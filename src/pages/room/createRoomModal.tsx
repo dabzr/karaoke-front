@@ -21,6 +21,7 @@ export function CreateRoomModal({
   const [password, setPassword] = useState<string>("");
   const [maxQuantity, setMaxQuantity] = useState<number | null>(null);
   const [maxQuantityError, setMaxQuantityError] = useState<string>("");
+  const [timeoutTime, setTimeoutTime] = useState<number | null>(null);
 
   const handleClose = () => {
     setName("");
@@ -28,11 +29,12 @@ export function CreateRoomModal({
     setMaxQuantity(null);
     setNameError("");
     setMaxQuantityError("");
+    setTimeoutTime(null);
     onClose();
   }
 
   const handleCreate = () => {
-    handleCreateRoom({ name, password, maxQuantity });
+    handleCreateRoom({ name, password, maxQuantity, timeoutTime });
     handleClose();
   }
 
@@ -67,6 +69,8 @@ export function CreateRoomModal({
           handleClose={handleClose}
           handleSuccess={handleCreate}
           validations={validations}
+          timeoutTime={timeoutTime}
+          setTimeoutTime={setTimeoutTime}
         />
       </div>
     </Modal>

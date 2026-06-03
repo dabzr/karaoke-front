@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getRoomAndSongs, editRoom } from "../services/room";
+import { getRoom, editRoom } from "../services/room";
 import { IRoom } from "../interfaces/room";
 import { useNavigate, useParams } from "react-router-dom";
 import { ICreateRoomParams } from "../mappers/room";
@@ -25,7 +25,7 @@ export function useHostRoom() {
 
   useEffect(() => {
     setIsLoading(true);
-    getRoomAndSongs(id ?? "")
+    getRoom()
       .then((data) => {
         setRoom(data)
       })

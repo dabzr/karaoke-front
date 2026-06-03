@@ -7,14 +7,16 @@ export type ICreateRoomParams = {
   name: string;
   password: string;
   maxQuantity: number | null;
+  timeoutTime: number | null;
 }
 
-export function createRoomMapToICreateRoom({ name, password, maxQuantity }: ICreateRoomParams): ICreateRoom {
+export function createRoomMapToICreateRoom({ name, password, maxQuantity, timeoutTime }: ICreateRoomParams): ICreateRoom {
   if(maxQuantity === null) throw new Error(strings[language][requiredFieldString]);
   return {
     name,
     password,
     max_room_size: maxQuantity,
+    timeout_seconds: timeoutTime,
   }
 }
 

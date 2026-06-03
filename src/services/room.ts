@@ -1,13 +1,12 @@
 import { IRoom, ApiRoomInfo } from "../interfaces/room";
 import api from "../utils/api";
-import { roomAuthEndpoint, roomInfoEndpoint } from "../utils/endpoints";
+import { roomAuthEndpoint, roomInfoEndpoint, roomManagerEndpoint } from "../utils/endpoints";
 import { apiRoomToIRoom, ICreateRoomParams } from "../mappers/room";
-import Cookies from "js-cookie";
 
-export async function getRoom(id: string): Promise<IRoom> {
-  const rooms = [];
-  if(!rooms) throw new Error();
-  return rooms.find((room) => room.code === id);
+export async function getRoom(): Promise<IRoom> {
+  const res = await api.get(roomManagerEndpoint);
+  const room = apiRoomToIRoom(res.data);
+  return room;
 } 
 
 export async function editRoom(id: string, data: ICreateRoomParams): Promise<IRoom> {

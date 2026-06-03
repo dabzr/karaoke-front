@@ -47,6 +47,7 @@ export const createOneString = "create-one";
 export const artistNameString = "artist";
 export const closeString = "close";
 export const nextString = "next";
+export const timeoutString = "timeout";
 
 export const strings: {[locale: string]: {[key: string]: string}} = {
   "pt-br": {
@@ -98,5 +99,6 @@ export const strings: {[locale: string]: {[key: string]: string}} = {
     [artistNameString]: "Nome do Artista",
     [closeString]: "Fechar",
     [nextString]: "Próxima",
+    [timeoutString]: "Tempo de espera para colocar mais músicas (segundos)",
   },
 };
