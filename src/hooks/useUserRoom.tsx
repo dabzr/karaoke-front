@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getRoomAndSongsWithUser } from "../services/room";
+import { getUserRoom } from "../services/room";
 import { IRoom } from "../interfaces/room";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQueue } from "./useQueue";
@@ -16,7 +16,7 @@ export function useUserRoom() {
 
   useEffect(() => {
     setIsLoading(true);
-    getRoomAndSongsWithUser(id ?? "")
+    getUserRoom(id ?? "")
       .then((data) => {
         setRoom(data)
       })
