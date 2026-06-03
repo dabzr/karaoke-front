@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { roomRoute, roomsRoute, joinRoute, loginRoute, registerRoute, managerRoomRoute, videoRoute } from "../utils/routes";
+import { roomRoute, roomsRoute, joinRoute, loginRoute, registerRoute, managerRoomRoute, videoRoute, tvRoute } from "../utils/routes";
 import { RoomsPage } from "./room/page";
 import { JoinPage } from "./join/page";
 import { JoinIdPage } from "./join/[id]/page";
@@ -11,6 +11,7 @@ import { RegisterPage } from "./register/page";
 import { ManagerRoomPage } from "./manager/room/[id]/page";
 import { RoomPage } from "./room/[id]/page";
 import { VideoPage } from "./video/[id]/page";
+import { TvPage } from "./tv/[id]/page";
 
 export const RoutesPages = () => {
   return (
@@ -25,6 +26,7 @@ export const RoutesPages = () => {
         <Route path={joinRoute} element={<PublicRoute Component={JoinPage}/>} />
         <Route path={joinRoute + "/:id"} element={<PublicRoute Component={JoinIdPage} />} />
         <Route path={videoRoute + "/:id"} element={<ProtectedRoute Component={VideoPage} />} />
+        <Route path={tvRoute + "/:id"} element={<ProtectedRoute Component={TvPage} />} />
       </Routes>
     </>
   )
