@@ -8,7 +8,7 @@ export const roomTopicQueueEndpoint = (code: string) => `/topic/queue${roomEndpo
 export const queueRoomQueueEndpoint = (code: string) => `/queue${roomEndpoint}/${code}/queue`;
 export const queueRoomEndpoint = (code: string) => `/queue${roomEndpoint}/${code}`;
 export const roomManagerEndpoint = `${roomEndpoint}${managerEndpoint}`;
-export const roomUsersEndpoint = (code: string) => `${roomEndpoint}/${code}`;
+export const roomUsersEndpoint = (code: string) => `${roomEndpoint}/${code}/user/all`;
 export const queueRoomPassEndpoint = (code: string) => `/queue${roomEndpoint}/${code}/pass`;
 export const queueRoomSongEndpoint = (code: string, id: string) => `/queue${roomEndpoint}/${code}/${id}`;
 

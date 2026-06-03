@@ -21,7 +21,8 @@ export function useHostRoom() {
   const [activeButton, setActiveButton] = useState<string>(strings[language][queueString]);
   const [qrCodeUrl, setQrCodeUrl] = useState<string>("");
   const { queue } = useQueue(id ?? "");
-  const { users } = useUsers(id ?? "");
+  const { usersList } = useUsers(id ?? "");
+  const [users, setUsers] = useState<ApiUser[]>([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -42,6 +43,23 @@ export function useHostRoom() {
     QRCode.toDataURL(`${url}${joinRoute}/${room.code}`, { width: 150, margin: 1 })
     .then((url: string) => setQrCodeUrl(url))
   }, [room])
+
+  useEffect(() => {
+    const initialUsers = usersList ? [...usersList] : [];
+    
+    const usersSet = new Set<string>(initialUsers.map((user) => user.name));
+    
+    let updatedUsers = [...initialUsers];
+
+    queue.forEach((item) => {
+      if (item.user && !usersSet.has(item.user.name)) {
+        usersSet.add(item.user.name);
+        updatedUsers = [...updatedUsers, item.user];
+      }
+    });
+
+    setUsers(updatedUsers);
+  }, [queue, usersList]);
 
   const handleEdit = (newData: ICreateRoomParams) => {
     setIsLoading(true);
@@ -73,7 +91,7 @@ export function useHostRoom() {
 
   const handleRemoveSong = (songId: string) => {
     setIsLoading(true);
-    deleteSong(id, songId)
+    deleteSong(id ?? "", songId)
       .then(() => {})
       .catch((err) => {
         setError(err);
