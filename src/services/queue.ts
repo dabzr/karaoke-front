@@ -14,5 +14,5 @@ export async function getNextSong(code: string): Promise<string> {
 
 export async function deleteSong(code: string, id: string) {
   const res = await api.delete(queueRoomSongEndpoint(code, id))
-  return res.data;
+  return 1;
 }

@@ -21,8 +21,7 @@ export function useHostRoom() {
   const [activeButton, setActiveButton] = useState<string>(strings[language][queueString]);
   const [qrCodeUrl, setQrCodeUrl] = useState<string>("");
   const { queue } = useQueue(id ?? "");
-  const { usersList } = useUsers(id ?? "");
-  const [users, setUsers] = useState<ApiUser[]>([]);
+  const { users } = useUsers(id ?? "");
 
   useEffect(() => {
     setIsLoading(true);
@@ -42,24 +41,7 @@ export function useHostRoom() {
     if(!room) return;
     QRCode.toDataURL(`${url}${joinRoute}/${room.code}`, { width: 150, margin: 1 })
     .then((url: string) => setQrCodeUrl(url))
-  }, [room])
-
-  useEffect(() => {
-    const initialUsers = usersList ? [...usersList] : [];
-    
-    const usersSet = new Set<string>(initialUsers.map((user) => user.name));
-    
-    let updatedUsers = [...initialUsers];
-
-    queue.forEach((item) => {
-      if (item.user && !usersSet.has(item.user.name)) {
-        usersSet.add(item.user.name);
-        updatedUsers = [...updatedUsers, item.user];
-      }
-    });
-
-    setUsers(updatedUsers);
-  }, [queue, usersList]);
+    }, [room])
 
   const handleEdit = (newData: ICreateRoomParams) => {
     setIsLoading(true);
