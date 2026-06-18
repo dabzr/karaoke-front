@@ -18,7 +18,7 @@ export function useRooms() {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    if(!host) return;
+    if(!host || !host.code) return;
     navigator(`${managerRoomRoute}/${host.code}`)
   }, [host])
 

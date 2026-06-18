@@ -5,7 +5,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { url } from "../utils/settings";
 import { joinRoute } from "../utils/routes";
 import * as QRCode from 'qrcode';
-import { useQueue } from "./useQueue";
 import { roomTopicQueueUrlEndpoint } from "../utils/endpoints";
 import SockJs from "sockjs-client";
 import { Client } from "@stomp/stompjs";
@@ -18,8 +17,7 @@ export function useTv() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState(null);
   const [qrCodeUrl, setQrCodeUrl] = useState<string>("");
-  const { queue } = useQueue(id ?? "");
-  const [url, setUrl] = useState<string>("");
+  const [videoUrl, setVideoUrl] = useState<string>("");
   const navigator = useNavigate();
 
   const returnPage = () => navigator(-1);
@@ -33,10 +31,10 @@ export function useTv() {
     });
 
     stompClient.onConnect = () => {
-      stompClient.subscribe(roomTopicQueueUrlEndpoint(id), (message: {body: string}) => {
+      stompClient.subscribe(roomTopicQueueUrlEndpoint(id ?? ""), (message: {body: string}) => {
         if(message.body) {
           const data = message.body;
-          setUrl(data);
+          setVideoUrl(data);
         }
       });
     };
@@ -78,8 +76,7 @@ export function useTv() {
     room,
     qrCodeUrl,
     isLoading,
-    queue,
-    url,
+    videoUrl,
     returnPage,
   }
 }

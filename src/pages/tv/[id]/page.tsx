@@ -1,8 +1,7 @@
 import { TopBar } from "../../../components/TopBar";
-import { strings, roomNotFoundString, backString, roomCodeString, qrCodeUrl } from "../../../utils/strings";
+import { strings, roomNotFoundString, backString, roomCodeString } from "../../../utils/strings";
 import { language } from "../../../utils/settings";
 import { useTv } from "../../../hooks/useTv";
-import { SongQueue } from "../../../components/SongQueue/index";
 import { Loading } from "../../../components/Loading/index";
 import { Tooltip } from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -12,8 +11,7 @@ export function TvPage() {
   const { 
     room, 
     isLoading,
-    queue,
-    url,
+    videoUrl,
     returnPage,
     qrCodeUrl,
   } = useTv();
@@ -31,7 +29,7 @@ export function TvPage() {
     );
   }
 
-  if(url) {
+  if(videoUrl) {
     return (
       <div className="fixed inset-0 flex flex-col py-14 h-screen overflow-hidden">
         <div className="flex p-2">
@@ -47,7 +45,7 @@ export function TvPage() {
         <div className="flex items-center justify-center pt-10">
           <iframe 
             className="w-[90vw] h-[90vh] max-w-[1280px] max-h-[720px] aspect-video"
-            src={`https://www.youtube.com/embed/${url}`}
+            src={`https://www.youtube.com/embed/${videoUrl}`}
             title="YouTube video player" 
             style={{ border: 'none' }}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" 
