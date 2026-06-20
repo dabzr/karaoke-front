@@ -30,7 +30,7 @@ export function LoginPage() {
   if(isLoading) return <Loading/>
 
   return (
-    <div className="flex flex-col h-full"> 
+    <div className="flex flex-col h-full bg-[#C19BDD]"> 
       <Toast error={error} handleCloseError={handleCloseError}/>
       <TopBar/>
       <div className="flex justify-center items-center p-4 top-56 w-full z-90 flex-col min-h-[calc(100vh-56px)]">
@@ -41,7 +41,7 @@ export function LoginPage() {
             </Tooltip>
           </button>
         </div>
-        <div className="flex flex-col w-100 justify-center items-center shadow-md rounded-sm">
+        <div className="flex flex-col w-100 justify-center items-center shadow-md rounded-sm bg-white">
           <div className="flex flex-col justify-start p-6 w-full">
             <h1 className="text-[1.25rem] self-start font-bold leading-6">{strings[language][loginString]}</h1>
             <div className="flex flex-col justify-start w-full grow shrink basis-[0%]">

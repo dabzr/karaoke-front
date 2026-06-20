@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+@theme {
+  --color-indigo: #8236bb;
+  --color-velvet: #5B188E;
+}
+
+body {
+  @apply bg-velvet text-neutral-800;
+  /* Isso garante que todo o fundo do app seja eletric por padrão */
+}
+
