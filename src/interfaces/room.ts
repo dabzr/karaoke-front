@@ -1,4 +1,4 @@
-import { ApiSong, ISong } from "./song";
+import { ApiSong } from "./song";
 import { IUser } from "./user";
 
 export interface IRoom {
@@ -6,9 +6,7 @@ export interface IRoom {
   code: string;
   password?: string;
   maxQuantity: number;
-  quantity: number;
-  users: IUser[];
-  songs: ISong[];
+  timeoutSeconds: number;
 };
 
 export interface CreateRoom {
@@ -34,9 +32,32 @@ export interface ApiRoom {
   songs: ApiSong[];
   max_ROOM_SIZE_FREE_USER: number;
   premium: boolean;
+  timeoutSeconds: number;
 }
 
 export interface ApiRoomInfo {
   name: string;
   hasPassword: boolean;
+}
+
+
+export interface IEditRoom {
+  name?: string;
+  password?: string;
+  maxQuantity?: number;
+  timeoutSeconds?: number;
+};
+export interface ApiEditRoom {
+  name?: string;
+  password?: string;
+  max_room_size?: number;
+  timeout_seconds?: number;
+}
+
+export interface ApiRoomMaxRoomSize {
+  code: string;
+  name: string;
+  password?: string;
+  maxRoomSize: number;
+  timeoutSeconds: number;
 }

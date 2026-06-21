@@ -16,7 +16,7 @@ export function useTv() {
   const [qrCodeUrl, setQrCodeUrl] = useState<string>("");
   const [videoUrl, setVideoUrl] = useState<string>("");
   const navigator = useNavigate();
-  const { code } = useQueueChange(id);
+  const { code } = useQueueChange(id ?? "");
 
   const returnPage = () => navigator(-1);
 

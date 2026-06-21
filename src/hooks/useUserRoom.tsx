@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getUserRoom } from "../services/room";
 import { IRoom } from "../interfaces/room";
-import { ApiSong } from "../interfaces/song";
+import { ISong } from "../interfaces/song";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQueue } from "./useQueue";
 import { useQueueChange } from "./useQueueChange";
@@ -14,11 +14,11 @@ export function useUserRoom() {
   const [open, setOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState(null);
-  const [message, setMessage] = useState<string>(null);
+  const [message, setMessage] = useState<string>("");
   const navigator = useNavigate();
   const { queue } = useQueue(id ?? "");
-  const { code } = useQueueChange(id);
-  const [lastSong, setLastSong] = useState<ApiSong>();
+  const { code } = useQueueChange(id ?? "");
+  const [lastSong, setLastSong] = useState<ISong | null>(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -36,7 +36,7 @@ export function useUserRoom() {
 
   useEffect(() => {
     if(!code) {
-      setLastSong("");
+      setLastSong(null);
       return;
     }
     getLastSong(id ?? "")

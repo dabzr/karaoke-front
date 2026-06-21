@@ -9,7 +9,7 @@ type Props = {
   error?: string;
   disabled?: boolean;
   type?: string;
-  inputMode?: string;
+  inputMode?: "search" | "text" | "email" | "tel" | "url" | "none" | "numeric" | "decimal" | undefined;
   ref?: any;
 };
 
@@ -23,7 +23,7 @@ export function Input({
   error = "",
   disabled = false,
   type = "text",
-  inputMode = "",
+  inputMode = undefined,
   ref,
 }: Props) {
 
