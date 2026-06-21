@@ -14,12 +14,12 @@ export function ProtectedRoute({
   type = "host",
 }: Props) {
   
-  const { host, isLoading: isLoadingHost } = useIsHost();
+  const { isHost, isLoading: isLoadingHost } = useIsHost();
   const { isUser, isLoading: isLoadingUser } = useIsUser();
 
   if(isLoadingHost || isLoadingUser) return <Loading/>
   
-  if(type === "host" && !host) {
+  if(type === "host" && !isHost) {
     return <Navigate to="/" replace/>
   }
 

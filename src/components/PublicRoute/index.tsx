@@ -12,11 +12,11 @@ export function PublicRoute({
   Component
 }: Props) {
   
-  const { host, isLoading } = useIsHost();
+  const { isLoading, isHost } = useIsHost();
 
   if(isLoading) return <Loading/>
   
-  if(host) return <Navigate to={profileRoute} replace/>
+  if(isHost) return <Navigate to={profileRoute} replace/>
 
   return (
     <Component/>
