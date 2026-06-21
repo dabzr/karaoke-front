@@ -23,8 +23,14 @@ npm install
 - Crie um .env com as mesmas variáveis do .env.example:
 
 ```.env
+
 VITE_FRONT_URL=
+VITE_BACK_URL=
 VITE_PORT=
+VITE_YOUTUBE_KEY=
+VITE_YOUTUBE_URL=
+VITE_LASTFM_KEY=
+VITE_LASTFM_URL=
 ```
 
 - Rode o projeto:

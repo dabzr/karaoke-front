@@ -1,7 +1,7 @@
-import { IRoom, ApiRoomInfo } from "../interfaces/room";
+import { IRoom, ApiRoomInfo, IEditRoom } from "../interfaces/room";
 import api from "../utils/api";
-import { roomInfoEndpoint, roomManagerEndpoint, roomUsersEndpoint, roomCodeEndpoint } from "../utils/endpoints";
-import { apiRoomToIRoom, ICreateRoomParams } from "../mappers/room";
+import { roomInfoEndpoint, roomManagerEndpoint, roomCodeEndpoint, roomIdEndpoint } from "../utils/endpoints";
+import { apiRoomMapToIRoom, apiRoomToIRoom, iEditRoomMapToApiEditRoom } from "../mappers/room";
 
 export async function getRoom(): Promise<IRoom> {
   const res = await api.get(roomManagerEndpoint);
@@ -9,14 +9,10 @@ export async function getRoom(): Promise<IRoom> {
   return room;
 } 
 
-export async function editRoom(id: string, data: ICreateRoomParams): Promise<IRoom> {
-  if(localStorage.getItem("rooms") === null) throw new Error();
-  const rooms = JSON.parse(localStorage.getItem("rooms"));
-  const room = rooms.find(r => r.code === id)
-  const editedRoom = {...room, ...data};
-  const newRooms = rooms.map((room) => room.code === id ? editedRoom : room);
-  localStorage.setItem("rooms", JSON.stringify(newRooms));
-  return editedRoom;
+export async function editRoom(id: string, data: IEditRoom): Promise<IRoom> {
+  const apiEditRoom = iEditRoomMapToApiEditRoom(data);
+  const res = await api.put(roomIdEndpoint(id), apiEditRoom);
+  return apiRoomMapToIRoom(res.data);
 } 
 
 export async function getRoomInfo(code: string): Promise<ApiRoomInfo> {

@@ -27,6 +27,7 @@ type Props = {
   buttonDisabled?: boolean;
   timeoutTime: number | null;
   setTimeoutTime: Dispatch<SetStateAction<number | null>>;
+  timeoutTimeDisabled: boolean,
 }
 
 export function RoomForm({
@@ -112,6 +113,7 @@ export function RoomForm({
             min={1}
             max={10}
             disabled={timeoutTimeDisabled}
+            error={""}
           />
           {children && <>{children}</>}
         </div>

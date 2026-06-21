@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { getRoom, editRoom } from "../services/room";
-import { IRoom } from "../interfaces/room";
+import { IEditRoom, IRoom } from "../interfaces/room";
 import { useNavigate, useParams } from "react-router-dom";
 import { ICreateRoomParams } from "../mappers/room";
 import { strings, queueString } from "../utils/strings";
-import { language, url } from "../utils/settings";
-import { joinRoute } from "../utils/routes";
+import { language } from "../utils/settings";
 import { useQueue } from "./useQueue";
 import { useUsers } from "./useUsers";
 import { getNextSong, deleteSong, stopSong } from "../services/queue";
@@ -36,11 +35,12 @@ export function useHostRoom() {
       });
   }, [])
 
-  const handleEdit = (newData: ICreateRoomParams) => {
+  const handleEdit = (data: IEditRoom) => {
     setIsLoading(true);
-    editRoom(id ?? "", newData)
+    editRoom(id ?? "", data)
       .then((data) => {
         setRoom(data)
+        console.log(data);
       })
       .catch((error) => {
         setError(error);
