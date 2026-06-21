@@ -16,7 +16,7 @@ export function useHostRoom() {
 
   const [room, setRoom] = useState<IRoom>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string>(null);
   const navigator = useNavigate();
   const [activeButton, setActiveButton] = useState<string>(strings[language][queueString]);
   const [qrCodeUrl, setQrCodeUrl] = useState<string>("");

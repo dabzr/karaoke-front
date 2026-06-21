@@ -11,6 +11,7 @@ export function useUserRoom() {
   const [open, setOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState(null);
+  const [message, setMessage] = useState<string>(null);
   const navigator = useNavigate();
   const { queue } = useQueue(id ?? "");
 
@@ -36,7 +37,10 @@ export function useUserRoom() {
 
   const onClose = () => {
     setOpen(false);
+    setMessage("Música adicionada com sucesso!");
   }
+
+  const handleCloseError = () => setMessage("");
 
   return {
     room,
@@ -47,5 +51,7 @@ export function useUserRoom() {
     openModal,
     onClose,
     queue,
+    message,
+    handleCloseError,
   }
 }

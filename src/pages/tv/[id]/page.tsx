@@ -5,6 +5,7 @@ import { useTv } from "../../../hooks/useTv";
 import { Loading } from "../../../components/Loading/index";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { GeneralLayout } from "../../../components/GeneralLayout"
+import { Tooltip } from "@mui/material";
 
 export function TvPage() { 
 

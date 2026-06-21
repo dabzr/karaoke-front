@@ -10,7 +10,6 @@ import { ApiUser } from "../../../../interfaces/user";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Tooltip } from "@mui/material";
 import { SongItem } from "../../../../components/SongItem/index";
-import { Toast } from "../../../../components/Toast";
 import { Button } from "../../../../components/Button";
 import TvIcon from '@mui/icons-material/Tv';
 import { GeneralLayout } from "../../../../components/GeneralLayout";
@@ -53,9 +52,9 @@ export function ManagerRoomPage() {
           activeButtonText={activeButton}
           onChange={(button) => setActiveButton(button)}
         />
-        <div className="flex flex-col bg-gray-50 shadow-md mx-20 mb-5 px-20 overflow-y-auto h-180 rounded-b-lg rounded-tr-lg">
+        <div className="relative flex flex-col bg-gray-50 shadow-md mx-20 mb-5 px-20 overflow-y-auto h-180 rounded-b-lg rounded-tr-lg">
           {activeButton === strings[language][queueString] && 
-            <div className="relative py-10">
+            <div className="py-10">
               <SongQueue 
                 songs={queue} 
                 header={[
@@ -81,7 +80,7 @@ export function ManagerRoomPage() {
                   />
                 }}
               />
-              <div className="absolute -right-5">
+              <div className="absolute right-5 bottom-5">
                 <a target="_blank" href={`/tv/${id}`}>
                   <Tooltip title="Abrir segunda tela">
                     <TvIcon/>

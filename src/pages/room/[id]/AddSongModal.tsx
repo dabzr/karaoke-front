@@ -79,7 +79,7 @@ export function AddSongModal({
 
   return (
     <Modal open={open} onClose={onClose}>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] bg-white border-2 border-gray-100 p-2 max-h-[90vh] overflow-y-auto">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] bg-white border-2 border-gray-100 p-2 max-h-[90vh] overflow-y-auto">
         <div className="flex flex-col justify-center items-center w-full">
           <div className="flex w-full items-center justify-center p-2">
             <span className="text-xl flex-1">{strings[language][addSongString]}</span>

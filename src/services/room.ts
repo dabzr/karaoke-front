@@ -1,6 +1,6 @@
 import { IRoom, ApiRoomInfo } from "../interfaces/room";
 import api from "../utils/api";
-import { roomInfoEndpoint, roomManagerEndpoint, roomUsersEndpoint } from "../utils/endpoints";
+import { roomInfoEndpoint, roomManagerEndpoint, roomUsersEndpoint, roomCodeEndpoint } from "../utils/endpoints";
 import { apiRoomToIRoom, ICreateRoomParams } from "../mappers/room";
 
 export async function getRoom(): Promise<IRoom> {
@@ -25,7 +25,7 @@ export async function getRoomInfo(code: string): Promise<ApiRoomInfo> {
 }
 
 export async function getUserRoom(code: string): Promise<IRoom> {
-  const res = await api.get(roomUsersEndpoint(code));
+  const res = await api.get(roomCodeEndpoint(code));
   const room = apiRoomToIRoom(res.data);
   return room;
 }

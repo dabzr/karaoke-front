@@ -33,6 +33,7 @@ export function useTv() {
     stompClient.onConnect = () => {
       stompClient.subscribe(roomTopicQueueUrlEndpoint(id ?? ""), (message: {body: string}) => {
         if(message.body) {
+          console.log(message.body)
           const data = message.body;
           setVideoUrl(data);
         }

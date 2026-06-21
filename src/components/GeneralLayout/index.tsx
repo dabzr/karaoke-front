@@ -18,7 +18,7 @@ export function GeneralLayout({
   return (
     <> 
       <Navbar/>
-      <Toast error={error} handleCloseError={() => handleCloseError()}/>
+      {(error && handleCloseError) ? <Toast error={error} handleCloseError={() => handleCloseError()}/> : <></>}
       <div className="flex items-center p-4 pt-16 w-full z-90 flex-col min-h-[calc(100vh-52px)]">
         <h1 className="flex items-center justify-center pt-5 text-4xl md:text-5xl font-black tracking-tight text-white mb-2">
           {screenName}
