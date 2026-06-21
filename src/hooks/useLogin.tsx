@@ -55,7 +55,7 @@ export function useLogin() {
         if(errorMessage === "Esse gerente não tem sala.") {
           navigator(`${roomsRoute}`);
         }
-        setError(strings[language][errorMessage]);
+        setError(errorMessage);
       })
       .finally(() => {
         setIsLoading(false);

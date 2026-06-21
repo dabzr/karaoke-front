@@ -53,7 +53,8 @@ export function useRegister() {
         if(res) navigator(`${loginRoute}`)
       })
       .catch((error) => {
-        setError(error);
+        const errorMessage = error.response.data.message;
+        setError(errorMessage);
       })
       .finally(() => {
         setIsLoading(false);
@@ -73,6 +74,8 @@ export function useRegister() {
     setConfirmPassword(value);
   }
 
+  const handleCloseError = () => setError("");
+
   return {
     email,
     setEmail,
@@ -82,11 +85,11 @@ export function useRegister() {
     returnPage,
     password,
     changePassword,
-    returnPage,
     emailError,
     passwordError,
     confirmPassword,
     verifyConfirmPassword,
     confirmPasswordError,
+    handleCloseError,
   }
 }

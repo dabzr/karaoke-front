@@ -30,14 +30,14 @@ export function LoginPage() {
   if(isLoading) return <Loading/>
 
   return (
-    <div className="flex flex-col h-full bg-[#C19BDD]"> 
+    <div className="flex flex-col h-full"> 
       <Toast error={error} handleCloseError={handleCloseError}/>
       <TopBar/>
       <div className="flex justify-center items-center p-4 top-56 w-full z-90 flex-col min-h-[calc(100vh-56px)]">
-        <div className="fixed left-4 z-110 top-16 justify-start">
-          <button onClick={returnPage} className="p-2 hover:bg-gray-100 rounded-full transition-colors cursor-pointer">
+        <div className="fixed left-4 z-110 top-23 justify-start">
+          <button onClick={returnPage} className="p-2 hover:bg-indigo rounded-full transition-colors cursor-pointer">
             <Tooltip title={strings[language][backString]}>
-              <ArrowBackIcon/>
+              <ArrowBackIcon className="text-white"/>
             </Tooltip>
           </button>
         </div>
