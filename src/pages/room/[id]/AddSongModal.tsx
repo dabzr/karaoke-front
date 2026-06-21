@@ -1,5 +1,5 @@
 import Modal from '@mui/material/Modal';
-import { useState, useRef } from "react";
+import { useState, useRef, Dispatch, SetStateAction } from "react";
 import { useParams } from 'react-router-dom';
 import { addSong } from '../../../services/song';
 import { strings, addSongString, closeString, } from '../../../utils/strings';
@@ -14,11 +14,13 @@ import SearchIcon from '@mui/icons-material/Search';
 type Props = {
   open: boolean;
   onClose: () => void;
+  setMessage: Dispatch<SetStateAction<string>>;
 }
 
 export function AddSongModal({
   open,
   onClose,
+  setMessage,
 }: Props) {
 
   const { id } = useParams();
@@ -30,6 +32,7 @@ export function AddSongModal({
     addSong(id ?? "", name, url)
     .then(() => {
       handleClose(true);
+      setMessage("Música adicionada com sucesso!");
     })
     .catch((err) => {
       console.log(err);

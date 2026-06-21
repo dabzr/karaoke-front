@@ -2,23 +2,31 @@ import { useIsHost } from "../../hooks/useIsHost";
 import { Loading } from "../Loading/index";
 import { ElementType } from "react";
 import { Navigate } from "react-router-dom";
-import { profileRoute } from "../../utils/routes";
+import { useIsUser } from "../../hooks/useIsUser";
 
 type Props = {
   Component: ElementType;
+  type?: "user" | "host";
 }
 
 export function ProtectedRoute({
   Component,
+  type = "host",
 }: Props) {
   
-  const { host, room, isLoading, logout } = useIsHost();
+  const { host, isLoading: isLoadingHost, logout } = useIsHost();
+  const { isUser, isLoading: isLoadingUser } = useIsUser();
 
-  if(isLoading) return <Loading/>
+  if(isLoadingHost || isLoadingUser) return <Loading/>
   
-  if(!host) {
+  if(type === "host" && !host) {
     logout();
     return <Navigate to="/" replace/>
+  }
+
+  if(type === "user" && !isUser) {
+    logout();
+    return <Navigate to="/join" replace/>
   }
 
   return (

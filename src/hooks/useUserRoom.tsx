@@ -56,7 +56,6 @@ export function useUserRoom() {
 
   const onClose = () => {
     setOpen(false);
-    setMessage("Música adicionada com sucesso!");
   }
 
   const handleCloseError = () => setMessage("");
@@ -73,5 +72,6 @@ export function useUserRoom() {
     message,
     handleCloseError,
     lastSong,
+    setMessage,
   }
 }

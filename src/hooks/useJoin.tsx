@@ -22,7 +22,8 @@ export function useJoin() {
         navigator(`${joinRoute}/${code}`)
       })
       .catch((error) => {
-        setCodeError(JSON.stringify(error));
+        const err = error.response.data.message;
+        setCodeError(err);
       })
       .finally(() => {
         setIsLoading(false);

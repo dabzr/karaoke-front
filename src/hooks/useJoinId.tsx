@@ -60,12 +60,14 @@ export function useJoinId() {
       .catch((error) => {
         const errorMessage = error.response.data.message;
         if(errorMessage === invalidPasswordString) returnPage();
-        setError(strings[language][errorMessage]);
+        setError(errorMessage);
       })
       .finally(() => {
         setIsLoading(false);
       });
   }
+
+  const handleCloseError = () => setError("");
 
   return {
     roomInfo,
@@ -78,5 +80,6 @@ export function useJoinId() {
     handlePassword,
     handleEnter,
     error,
+    handleCloseError,
   }
 }

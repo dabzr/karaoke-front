@@ -2,7 +2,7 @@ import { useIsHost } from "../../hooks/useIsHost";
 import { Loading } from "../Loading/index";
 import { ElementType } from "react";
 import { Navigate } from "react-router-dom";
-import { managerRoomRoute, profileRoute } from "../../utils/routes";
+import { profileRoute } from "../../utils/routes";
 
 type Props = {
   Component: ElementType;
