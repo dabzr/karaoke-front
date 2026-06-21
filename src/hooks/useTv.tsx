@@ -5,10 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { url } from "../utils/settings";
 import { joinRoute } from "../utils/routes";
 import * as QRCode from 'qrcode';
-import { roomTopicQueueUrlEndpoint, usersTopicQueueQrEndpoint } from "../utils/endpoints";
-import SockJs from "sockjs-client";
-import { Client } from "@stomp/stompjs";
-import { backUrl } from "../utils/settings";
+import { useQueueChange } from "./useQueueChange";
 
 export function useTv() {
   const { id } = useParams();
@@ -19,60 +16,9 @@ export function useTv() {
   const [qrCodeUrl, setQrCodeUrl] = useState<string>("");
   const [videoUrl, setVideoUrl] = useState<string>("");
   const navigator = useNavigate();
+  const { code } = useQueueChange(id);
 
   const returnPage = () => navigator(-1);
-
-  useEffect(() => {
-    const socket = () => new SockJs(backUrl + "/ws");
-    const stompClient = new Client({
-      webSocketFactory: socket,
-      reconnectDelay: 5000,
-      debug: (str) => console.log(str),
-    });
-    const stompClientQr = new Client({
-      webSocketFactory: socket,
-      reconnectDelay: 5000,
-      debug: (str) => console.log(str),
-    });
-
-    stompClient.onConnect = () => {
-      stompClient.subscribe(roomTopicQueueUrlEndpoint(id ?? ""), (message: {body: string}) => {
-        if(message.body) {
-          const data = message.body;
-          setVideoUrl(data);
-        }
-      });
-    };
-
-    stompClientQr.onConnect = () => {
-      stompClientQr.subscribe(usersTopicQueueQrEndpoint(id ?? ""), (message: {body: string}) => {
-        if(message.body) {
-          const data = message.body;
-          setVideoUrl("");
-        }
-      });
-    };
-
-    stompClient.onStompError = (frame) => {
-      console.error("Erro no WS:", frame.headers["message"]);
-    }
-
-    stompClientQr.onStompError = (frame) => {
-      console.error("Erro no WS do QrCode:", frame.headers["message"]);
-    }
-
-    stompClient.activate();
-    stompClientQr.activate();
-
-    return () => {
-      if (stompClient.active) {
-        stompClient.deactivate();
-      }
-      if (stompClientQr.active) {
-        stompClientQr.deactivate();
-      }
-    }
-  }, [id])
 
   useEffect(() => {
     setIsLoading(true);
@@ -98,7 +44,7 @@ export function useTv() {
     room,
     qrCodeUrl,
     isLoading,
-    videoUrl,
+    videoUrl: code,
     returnPage,
   }
 }

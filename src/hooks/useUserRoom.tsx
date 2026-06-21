@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { getUserRoom } from "../services/room";
 import { IRoom } from "../interfaces/room";
+import { ApiSong } from "../interfaces/song";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQueue } from "./useQueue";
+import { useQueueChange } from "./useQueueChange";
+import { getLastSong } from "../services/queue";
 
 export function useUserRoom() {
   const { id } = useParams();
@@ -14,6 +17,8 @@ export function useUserRoom() {
   const [message, setMessage] = useState<string>(null);
   const navigator = useNavigate();
   const { queue } = useQueue(id ?? "");
+  const { code } = useQueueChange(id);
+  const [lastSong, setLastSong] = useState<ApiSong>();
 
   useEffect(() => {
     setIsLoading(true);
@@ -28,6 +33,20 @@ export function useUserRoom() {
         setIsLoading(false);
       });
   }, [])
+
+  useEffect(() => {
+    if(!code) {
+      setLastSong("");
+      return;
+    }
+    getLastSong(id ?? "")
+      .then((data) => {
+        setLastSong(data[0]);
+      })
+      .catch((error) => {
+        setError(error);
+      })
+  }, [code])
 
   const goToProfilePage = () => {
     navigator("/user")
@@ -53,5 +72,6 @@ export function useUserRoom() {
     queue,
     message,
     handleCloseError,
+    lastSong,
   }
 }

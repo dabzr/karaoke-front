@@ -1,6 +1,6 @@
 import { ApiSong } from "../interfaces/song";
 import api from "../utils/api";
-import { queueRoomEndpoint, queueRoomPassEndpoint, queueRoomSongEndpoint, roomQrScreenEndpoint } from "../utils/endpoints";
+import { queueRoomEndpoint, queueRoomPassEndpoint, queueRoomSongEndpoint, roomQrScreenEndpoint, historyEndpoint } from "../utils/endpoints";
 
 export async function getQueue(code: string): Promise<ApiSong[]> {
   const res = await api.get(queueRoomEndpoint(code));
@@ -20,4 +20,9 @@ export async function stopSong(code: string): Promise<string> {
 export async function deleteSong(code: string, id: string) {
   const res = await api.delete(queueRoomSongEndpoint(code, id))
   return 1;
+}
+
+export async function getLastSong(code: string) {
+  const res = await api.get(historyEndpoint(code, 0, 0));
+  return res.data;
 }
