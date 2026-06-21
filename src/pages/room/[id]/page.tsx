@@ -21,6 +21,9 @@ export function RoomPage() {
     handleCloseError,
     lastSong,
     setMessage,
+    toggleEmojiDrawner,
+    emojiDrawerOpened,
+    handleSelectEmoji,
   } = useUserRoom();
 
   if(isLoading) return <Loading/>
@@ -77,6 +80,30 @@ export function RoomPage() {
             {lastSong ? lastSong.artistName : ""}
           </span>
         </div> 
+      </div>
+      <div className="fixed bottom-5 right-5 z-50 flex items-center gap-2">
+        
+        <div 
+          className={`flex items-center gap-3 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg transition-all duration-300 ease-in-out transform ${
+            emojiDrawerOpened 
+              ? "opacity-100 translate-x-0 pointer-events-auto" 
+              : "opacity-0 translate-x-10 pointer-events-none"
+          }`}
+        >
+          <button onClick={() => handleSelectEmoji("👏")} className="hover:scale-125 transition-transform text-3xl">👏</button>
+          <button onClick={() => handleSelectEmoji("❤️")} className="hover:scale-125 transition-transform text-3xl">❤️</button>
+          <button onClick={() => handleSelectEmoji("😂")} className="hover:scale-125 transition-transform text-3xl">😂</button>
+        </div>
+
+        {lastSong ?
+          <button 
+            onClick={toggleEmojiDrawner} 
+            className="bg-wisteria hover:scale-105 active:scale-95 transition-all rounded-full w-15 h-15 text-4xl flex items-center justify-center shadow-lg"
+          >
+            {emojiDrawerOpened ? "❌" : "😀"}
+          </button>
+          : <></>
+        }
       </div>
     </div>
   );

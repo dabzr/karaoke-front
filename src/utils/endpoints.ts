@@ -20,3 +20,5 @@ export const usersTopicQueueQrEndpoint = (code: string) => `${usersTopicQueueEnd
 export const historyEndpoint = (code: string, start: number, end: number) => `/queue${roomEndpoint}/${code}/history/${start}/${end}`
 export const roomIdEndpoint = (code: string) => `${roomEndpoint}/${code}`
 export const roomUserEndpoint = (code: string) => `${roomEndpoint}/${code}/user`;
+export const topicUsersRoomEmojiEndpoint = (code: string) => `/topic/users${roomEndpoint}/${code}/emoji`;
+export const roomEmojiEndpoint = (code: string, emoji: string) => `${roomEndpoint}/${code}/emoji/${emoji}`;
