@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useQueue } from "./useQueue";
 import { useQueueChange } from "./useQueueChange";
 import { getLastSong } from "../services/queue";
+import { sendEmoji } from "../services/emoji";
 
 export function useUserRoom() {
   const { id } = useParams();
@@ -19,6 +20,7 @@ export function useUserRoom() {
   const { queue } = useQueue(id ?? "");
   const { code } = useQueueChange(id ?? "");
   const [lastSong, setLastSong] = useState<ISong | null>(null);
+  const [emojiDrawerOpened, setEmojiDrawerOpened] = useState<boolean>(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -60,6 +62,13 @@ export function useUserRoom() {
 
   const handleCloseError = () => setMessage("");
 
+  const toggleEmojiDrawner = () => setEmojiDrawerOpened((prev) => !prev);
+  
+  const handleSelectEmoji = (emoji: string) => {
+    sendEmoji(id ?? "", emoji);  
+    toggleEmojiDrawner();
+  }
+
   return {
     room,
     navigator,
@@ -73,5 +82,8 @@ export function useUserRoom() {
     handleCloseError,
     lastSong,
     setMessage,
+    toggleEmojiDrawner,
+    emojiDrawerOpened,
+    handleSelectEmoji,
   }
 }
