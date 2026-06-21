@@ -14,18 +14,16 @@ export function ProtectedRoute({
   type = "host",
 }: Props) {
   
-  const { host, isLoading: isLoadingHost, logout } = useIsHost();
+  const { host, isLoading: isLoadingHost } = useIsHost();
   const { isUser, isLoading: isLoadingUser } = useIsUser();
 
   if(isLoadingHost || isLoadingUser) return <Loading/>
   
   if(type === "host" && !host) {
-    logout();
     return <Navigate to="/" replace/>
   }
 
   if(type === "user" && !isUser) {
-    logout();
     return <Navigate to="/join" replace/>
   }
 

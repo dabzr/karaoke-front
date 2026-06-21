@@ -12,13 +12,12 @@ export function PublicRoute({
   Component
 }: Props) {
   
-  const { host, isLoading, logout } = useIsHost();
+  const { host, isLoading } = useIsHost();
 
   if(isLoading) return <Loading/>
   
   if(host) return <Navigate to={profileRoute} replace/>
 
-  logout();
   return (
     <Component/>
   );
