@@ -1,20 +1,19 @@
-import { strings, invalidRoomCodeString } from "../utils/strings";
-import { language } from "../utils/settings";
+import { ApiRoomInfo } from "../interfaces/room";
 import { IUser } from "../interfaces/user";
+import api from "../utils/api";
+import { joinRoomEndpoint, roomInfoEndpoint } from "../utils/endpoints";
+import Cookies from "js-cookie";
 
-export async function joinRoom(code: string): Promise<boolean> {
-  if(localStorage.getItem("rooms") === null) throw new Error();
-  const room = JSON.parse(localStorage.getItem("rooms")).find(r => r.code === code);
-  if(!room) throw new Error(strings[language][invalidRoomCodeString]);
-  return true;
+export async function getRoomInfo(code: string): Promise<ApiRoomInfo> {
+  const res = await api.get(roomInfoEndpoint(code));
+  return res.data;
 }
 
-export async function joinRoomAndCreateUser(code: string, password: string, name: string): Promise<IUser> {
-  if(localStorage.getItem("rooms") === null) throw new Error();
-  const room = JSON.parse(localStorage.getItem("rooms")).find(r => r.code === code);
-  if(!room) throw new Error(strings[language][invalidRoomCodeString]);
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-  const newUser = {"name": name, "roomCode": code};
-  localStorage.setItem("users", JSON.stringify([...users, newUser]));
-  return newUser;
+export async function joinRoom(code: string, password: string, name: string): Promise<IUser> {
+  const res = await api.post(joinRoomEndpoint(code), { name, password });
+  Cookies.set("accessToken", res.data)
+  return {
+    id: res.data,
+    name,
+  }
 }

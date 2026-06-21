@@ -1,6 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import { language } from "../../utils/settings";
-import { cancelString, maxQuantityPlaceholderString, maxQuantityString, namePlaceholderString, nameString, passwordString, strings } from "../../utils/strings";
+import { cancelString, maxQuantityPlaceholderString, maxQuantityString, namePlaceholderString, nameString, passwordString, strings, timeoutString } from "../../utils/strings";
 import { Button } from "../Button";
 import { Input } from "../Input";
 import { NumberInput } from "../NumberInput";
@@ -25,6 +25,8 @@ type Props = {
   successButtonText: string;
   children?: ReactNode;
   buttonDisabled?: boolean;
+  timeoutTime: number | null;
+  setTimeoutTime: Dispatch<SetStateAction<number | null>>;
 }
 
 export function RoomForm({
@@ -46,6 +48,9 @@ export function RoomForm({
   successButtonText,
   children,
   buttonDisabled = false,
+  timeoutTime,
+  setTimeoutTime,
+  timeoutTimeDisabled = false,
 }: Props) {
 
   const validateErrors = () => {
@@ -66,52 +71,64 @@ export function RoomForm({
   }
 
   return (
-    <div className="flex flex-col justify-center items-center w-full">
-      <div className="p-2 text-xl">{title}</div>
-      <div className="bg-gray-400 w-full h-[2px]"></div>
-      <div className="p-2">
-        <Input
-          label={strings[language][nameString]}
-          value={name}
-          onChange={setName}
-          placeholder={strings[language][namePlaceholderString]}
-          required
-          maxLength={50}
-          error={nameError}
-          disabled={nameDisabled}
-        />
-        <PasswordInput
-          label={strings[language][passwordString]} 
-          value={password}
-          onChange={setPassword}
-          maxLength={30}
-          disabled={passwordDisabled}
-        />
-        <NumberInput
-          label={strings[language][maxQuantityString]}
-          value={maxQuantity === null ? "" : String(maxQuantity)}
-          onChange={setMaxQuantity}
-          placeholder={strings[language][maxQuantityPlaceholderString]}
-          required
-          min={1}
-          max={1000}
-          error={maxQuantityError}
-          disabled={maxQuantityDisabled}
-        />
-      </div>
-      {children && <div>{children}</div>}
-      <div className="bg-gray-400 w-full h-[2px]"></div>
-      <div className="flex justify-between w-full mt-2">
-        <Button
-          label={strings[language][cancelString]} 
-          onClick={handleClose}
-          disabled={buttonDisabled}
-        />
-        <Button 
-          disabled={buttonDisabled}
-          label={successButtonText}
-          onClick={successFunction}
-        />
+    <div className="flex flex-col justify-start p-6 w-full">
+      <h1 className="text-[1.25rem] self-start font-bold leading-6">{title}</h1>
+      <div className="flex flex-col justify-start w-full grow shrink basis-[0%]">
+        <div className="mt-6 mb-4 mx-0">
+          <Input
+            label={strings[language][nameString]}
+            value={name}
+            onChange={setName}
+            placeholder={strings[language][namePlaceholderString]}
+            required
+            maxLength={50}
+            error={nameError}
+            disabled={nameDisabled}
+          />
+          <PasswordInput
+            label={strings[language][passwordString]} 
+            value={password}
+            onChange={setPassword}
+            maxLength={30}
+            disabled={passwordDisabled}
+          />
+          <NumberInput
+            label={strings[language][maxQuantityString]}
+            value={maxQuantity === null ? "" : String(maxQuantity)}
+            onChange={setMaxQuantity}
+            placeholder={strings[language][maxQuantityPlaceholderString]}
+            required
+            min={1}
+            max={1000}
+            error={maxQuantityError}
+            disabled={maxQuantityDisabled}
+          />
+          <NumberInput
+            label={strings[language][timeoutString]}
+            value={timeoutTime === null ? "" : String(timeoutTime)}
+            onChange={setTimeoutTime}
+            placeholder={"1-10"}
+            required
+            min={1}
+            max={10}
+            disabled={timeoutTimeDisabled}
+          />
+          {children && <>{children}</>}
+        </div>
+        <div className="flex gap-5 w-full justify-center">
+          <Button
+            label={strings[language][cancelString]} 
+            onClick={handleClose}
+            disabled={buttonDisabled}
+            className={"bg-neutral-900 hover:bg-neutral-800 active:bg-black px-8 py-3 rounded-xl font-bold text-sm text-white transition-all cursor-pointer shadow-md hover:shadow-lg w-full max-w-xs transform hover:-translate-y-0.5"}
+          />
+          <Button 
+            disabled={buttonDisabled}
+            label={successButtonText}
+            onClick={successFunction}
+            className={"bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 px-8 py-3 rounded-xl font-bold text-sm text-white transition-all cursor-pointer shadow-md hover:shadow-lg w-full max-w-xs transform hover:-translate-y-0.5"}
+          />
+        </div>
       </div>
     </div>
   );

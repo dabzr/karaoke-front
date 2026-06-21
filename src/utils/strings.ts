@@ -1,5 +1,4 @@
 
-export const roomsTitleString = "rooms-title";
 export const defaultAvatarString = "default-avatar";
 export const addRoomString = "add-room";
 export const goToRoomString = "go-to-room";
@@ -24,17 +23,39 @@ export const invalidRoomCodeString = "invalid-room-code";
 export const roomNotFoundString = "room-not-found";
 export const writePasswordString = "write-password";
 export const writeNameString = "write-name";
-export const invalidPasswordString = "invalid-password";
+export const invalidPasswordString = "Invalid Password";
 export const addSongString = "add-song";
 export const noMusicString = "no-music";
 export const positionString = "position";
 export const songString = "music";
 export const singerString = "singer";
 export const profileString = "profile";
+export const invalidEmailString = "invalid-email";
+export const logoutString = "logout";
+export const invalidSizeRoomString = "Your plan don't cover a room that big, upgrade your plan for unlimited sized rooms";
+export const backString = "back";
+export const youtubeUrlRequired = "youtube-url-required";
+export const songNameString = "song-name"; 
+export const urlString = "url"; 
+export const addString = "add"; 
+export const loginString = "login"; 
+export const createAccountString = "create-account"; 
+export const managerNotFoundString = "Manager not found"; 
+export const alreadyHasAccountString = "already-has-account";
+export const notHaveAccountYetString = "not-have-account-yet";
+export const createOneString = "create-one";
+export const artistNameString = "artist";
+export const closeString = "close";
+export const nextString = "next";
+export const timeoutString = "timeout";
+export const removeString = "remove";
+export const planFree = "FREE";
+export const planPremiumDay = "PREMIUM_1DAY";
+export const planPremiumMonth = "PREMIUM_1MONTH";
+export const planPremiumYear = "PREMIUM_1YEAR";
 
 export const strings: {[locale: string]: {[key: string]: string}} = {
   "pt-br": {
-    [roomsTitleString]: "Suas Salas",
     [defaultAvatarString]: "Você",
     [addRoomString]: "Adicionar Sala",
     [goToRoomString]: "Ir para sala",
@@ -66,5 +87,28 @@ export const strings: {[locale: string]: {[key: string]: string}} = {
     [songString]: "Música",
     [singerString]: "Cantor",
     [profileString]: "Perfil",
+    [invalidEmailString]: "Digite um email",
+    [logoutString]: "Fazer Logout",
+    [invalidSizeRoomString]: "Seu plano não cobre uma sala tão grande, atualize seu plano para criar salas com quantidade ilimitada de participantes",
+    [backString]: "Voltar",
+    [youtubeUrlRequired]: "O link deve ser um link válido do youtube",
+    [songNameString]: "Nome da música",
+    [urlString]: "Link do youtube",
+    [addString]: "Adicionar",
+    [loginString]: "Fazer Login",
+    [createAccountString]: "Criar Conta",
+    [managerNotFoundString]: "Usuário não encontrado",
+    [alreadyHasAccountString]: "Já possui conta?",
+    [notHaveAccountYetString]: "Ainda não possui conta?",
+    [createOneString]: "Crie uma",
+    [artistNameString]: "Nome do Artista",
+    [closeString]: "Fechar",
+    [nextString]: "Próxima",
+    [timeoutString]: "Tempo de espera para colocar mais músicas (segundos)",
+    [removeString]: "Excluir",
+    [planFree]: "Grátis",
+    [planPremiumDay]: "Diário",
+    [planPremiumMonth]: "Mensal",
+    [planPremiumYear]: "Anual",
   },
 };

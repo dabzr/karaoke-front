@@ -1,25 +1,30 @@
 import { useEffect, useState } from "react";
-import { getRoomAndSongs } from "../services/room";
+import { getUserRoom } from "../services/room";
 import { IRoom } from "../interfaces/room";
+import { ApiSong } from "../interfaces/song";
 import { useNavigate, useParams } from "react-router-dom";
-import { createRoomMap, ICreateRoomParams } from "../mappers/createRoom";
-import { ISong } from "../interfaces/song";
+import { useQueue } from "./useQueue";
+import { useQueueChange } from "./useQueueChange";
+import { getLastSong } from "../services/queue";
 
 export function useUserRoom() {
   const { id } = useParams();
 
   const [room, setRoom] = useState<IRoom>();
-  const [songs, setSongs] = useState<ISong[]>([]);
+  const [open, setOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState(null);
+  const [message, setMessage] = useState<string>(null);
   const navigator = useNavigate();
+  const { queue } = useQueue(id ?? "");
+  const { code } = useQueueChange(id);
+  const [lastSong, setLastSong] = useState<ApiSong>();
 
   useEffect(() => {
     setIsLoading(true);
-    getRoomAndSongs(id ?? "")
+    getUserRoom(id ?? "")
       .then((data) => {
-        setRoom(data.room)
-        setSongs(data.songs)
+        setRoom(data)
       })
       .catch((error) => {
         setError(error); 
@@ -29,15 +34,44 @@ export function useUserRoom() {
       });
   }, [])
 
+  useEffect(() => {
+    if(!code) {
+      setLastSong("");
+      return;
+    }
+    getLastSong(id ?? "")
+      .then((data) => {
+        setLastSong(data[0]);
+      })
+      .catch((error) => {
+        setError(error);
+      })
+  }, [code])
+
   const goToProfilePage = () => {
     navigator("/user")
   }
 
+  const openModal = () => setOpen(true);
+
+  const onClose = () => {
+    setOpen(false);
+    setMessage("Música adicionada com sucesso!");
+  }
+
+  const handleCloseError = () => setMessage("");
+
   return {
     room,
-    songs,
     navigator,
     goToProfilePage,
     isLoading,
+    open,
+    openModal,
+    onClose,
+    queue,
+    message,
+    handleCloseError,
+    lastSong,
   }
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { joinRoom } from "../services/join";
+import { getRoomInfo } from "../services/join";
 import { joinRoute } from "../utils/routes";
 import { strings, invalidRoomCodeString } from "../utils/strings";
 import { language } from "../utils/settings";
@@ -12,17 +12,17 @@ export function useJoin() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleEnter = () => {
-    if(code === "") {
+    if(code.trim() === "") {
       setCodeError(strings[language][invalidRoomCodeString]);
       return;
     }
     setIsLoading(true);
-    joinRoom(code)
+    getRoomInfo(code)
       .then(() => {
         navigator(`${joinRoute}/${code}`)
       })
       .catch((error) => {
-        setCodeError(error.message);
+        setCodeError(JSON.stringify(error));
       })
       .finally(() => {
         setIsLoading(false);
