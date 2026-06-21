@@ -26,7 +26,7 @@ export function Navbar({
   return (
     <TopBar>
       <div className="flex gap-10">
-        <button className={`flex max-md:hidden items-center ${className}`} onClick={goToProfilePage}> 
+        <button className={`flex max-md:hidden items-center cursor-pointer ${className}`} onClick={goToProfilePage}> 
           <Tooltip title={strings[language][profileString]}>
             <Avatar sx= {{ bgcolor: "#C19BDD" }}>{host ? host.email[0].toUpperCase() : "U"}</Avatar>
           </Tooltip>

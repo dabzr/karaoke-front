@@ -65,7 +65,7 @@ export function useHostRoom() {
     setIsLoading(true);
     getNextSong(id ?? "")
       .then((data) => {
-        navigator("/video/" + data)
+        
       })
       .catch((err) => {
         setError(err);

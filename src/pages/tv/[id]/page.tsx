@@ -3,8 +3,8 @@ import { strings, roomNotFoundString, backString, roomCodeString } from "../../.
 import { language } from "../../../utils/settings";
 import { useTv } from "../../../hooks/useTv";
 import { Loading } from "../../../components/Loading/index";
-import { Tooltip } from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { GeneralLayout } from "../../../components/GeneralLayout"
 
 export function TvPage() { 
 
@@ -44,7 +44,7 @@ export function TvPage() {
         </div>
         <div className="flex items-center justify-center pt-10">
           <iframe 
-            className="w-[90vw] h-[90vh] max-w-[1280px] max-h-[720px] aspect-video"
+            className="w-[90vw] h-[90vh] max-w-7xl max-h-180 aspect-video"
             src={`https://www.youtube.com/embed/${videoUrl}`}
             title="YouTube video player" 
             style={{ border: 'none' }}
@@ -57,20 +57,16 @@ export function TvPage() {
   }
 
   return (
-    <div className="fixed inset-0 flex flex-col py-14 h-screen overflow-hidden"> 
-      <TopBar/>
-      <div className="flex items-center justify-center text-[1cm] mx-20 h-20">
-        <span className="text-[30px]"> {room.name} </span>
-      </div> 
-      <div className="flex flex-col justify-center h-full items-center">
-        <span className="text-[50px]">{`${strings[language][roomCodeString]}: ${room.code}`}</span>
+    <GeneralLayout screenName={room.name}>
+      <div className="flex flex-col justify-center h-full items-center -m-2">
+        <span className="text-[50px] text-white bold">{`${strings[language][roomCodeString]}: ${room.code}`}</span>
         {qrCodeUrl && (
           <img
             src={qrCodeUrl}
-            className="inline-block ml-4 w-200 h-200 shadow-sm border border-gray-200"
+            className="inline-block ml-4 w-200 h-190 shadow-sm border border-gray-200"
           />
         )}
       </div>
-    </div>
+    </GeneralLayout>
   );
 }
