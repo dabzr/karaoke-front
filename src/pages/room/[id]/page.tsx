@@ -20,6 +20,7 @@ export function RoomPage() {
     message,
     handleCloseError,
     lastSong,
+    setMessage,
   } = useUserRoom();
 
   if(isLoading) return <Loading/>
@@ -44,14 +45,14 @@ export function RoomPage() {
           {room.name}
         </h1>
       </div> 
-      <div className="bg-gray-50 shadow-md mb-5 overflow-y-auto flex-1 mx-4">
+      <div className="bg-gray-50 shadow-md mb-5 overflow-y-auto flex-1 mx-4 max-h-130">
         <SongQueue songs={queue}/>
       </div>
       <div>
         <div className="flex justify-center items-center px-30">
           <Button onClick={openModal} label={strings[language][addSongString]}/>
         </div>
-        <AddSongModal open={open} onClose={onClose}/>
+        <AddSongModal open={open} onClose={onClose} setMessage={setMessage}/>
       </div>
 
       <div 

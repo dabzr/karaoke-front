@@ -66,6 +66,7 @@ export function ManagerRoomPage() {
                 ]}
                 generateSongItem={(song, index) => {
                   return <SongItem 
+                    key={index}
                     song={song} 
                     index={index} 
                     children={

@@ -5,6 +5,8 @@ import { Button } from "../../../components/Button/index";
 import { useJoinId } from "../../../hooks/useJoinId";
 import { strings, enterString, roomNotFoundString, writePasswordString, writeNameString } from "../../../utils/strings";
 import { language } from "../../../utils/settings";
+import { Loading } from "../../../components/Loading";
+import { Toast } from "../../../components/Toast";
 
 export function JoinIdPage() {
 
@@ -19,7 +21,10 @@ export function JoinIdPage() {
     handlePassword,
     handleEnter, 
     error,
+    handleCloseError,
   } = useJoinId();
+
+  if(isLoading) return <Loading/>
 
   if(!roomInfo) {
     return (
@@ -35,6 +40,7 @@ export function JoinIdPage() {
   return (
     <div className="flex flex-col p-14 min-h-screen"> 
       <TopBar/>
+      <Toast  error={error} handleCloseError={handleCloseError}/>
       {!validateAccess ? 
         <div className="flex flex-col items-center h-screen justify-center">
           <div className="flex flex-col w-60">

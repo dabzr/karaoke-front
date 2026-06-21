@@ -1,4 +1,4 @@
-import { loginEndpoint, managerEndpoint, roomManagerEndpoint } from "../utils/endpoints";
+import { loginEndpoint, managerEndpoint, roomManagerEndpoint, roomUserEndpoint } from "../utils/endpoints";
 import { IHost, ApiHostRoom } from "../interfaces/host";
 import api from "../utils/api";
 import Cookies from "js-cookie";
@@ -27,5 +27,10 @@ export async function logout(): Promise<boolean> {
 
 export async function register(email: string, password: string): Promise<boolean> {
   const res = await api.post(managerEndpoint, { email, password });
+  return true;
+}
+
+export async function getUser(id: string): Promise<boolean> {
+  const res = await api.get(roomUserEndpoint(id));
   return true;
 }
