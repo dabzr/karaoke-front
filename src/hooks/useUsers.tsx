@@ -14,7 +14,7 @@ export function useUsers(id: string) {
   useEffect(() => {
     setIsLoading(true);
     getUsers(id ?? "")
-      .then((data: ApiSong[]) => {
+      .then((data: ApiUser[]) => {
         setUsers(data)
       })
       .catch((error: string) => {

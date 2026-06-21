@@ -7,8 +7,6 @@ import { createRoom } from "../services/rooms";
 import { useNavigate } from "react-router-dom";
 import { ICreateRoomParams } from "../mappers/room";
 import { managerRoomRoute } from "../utils/routes";
-import { strings } from "../utils/strings";
-import { language } from "../utils/settings";
 
 export function useProfile() {
 
@@ -46,7 +44,7 @@ export function useProfile() {
       })
   };
 
-  const goToRoom = () => navigator(managerRoomRoute + `/${room.code}`);
+  const goToRoom = () => navigator(managerRoomRoute + `/${room?.code || ""}`);
   const handleCloseError = () => setError(""); 
 
   return {

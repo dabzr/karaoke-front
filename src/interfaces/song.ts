@@ -3,7 +3,7 @@ import { ApiUser } from "./user";
 export interface ISong {
   id: string;
   name: string;
-  artist?: string;
+  artistName?: string;
   url?: string;
   user: ApiUser;
 };

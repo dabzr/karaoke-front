@@ -24,7 +24,7 @@ export function AddSongModal({
   const { id } = useParams();
   const [name, setName] = useState<string>("");
   const [videos, setVideos] = useState<IVideo[]>([]);
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleAdd = (name: string, url: string) => {
     addSong(id ?? "", name, url)
@@ -50,7 +50,7 @@ export function AddSongModal({
     handleAdd(video.title, video.id);
   }
 
-  const searchVideos = () => {
+  const searchVideos = (event: React.FormEvent) => {
     const cleanedText = name.trim().toLowerCase();
     event.preventDefault();
     if(!cleanedText) {
@@ -84,7 +84,7 @@ export function AddSongModal({
           <div className="flex w-full items-center justify-center p-2">
             <span className="text-xl flex-1">{strings[language][addSongString]}</span>
             <Tooltip title={strings[language][closeString]}>
-              <button onClick={handleClose}>X</button>
+              <button onClick={() => handleClose()}>X</button>
             </Tooltip>
           </div>
           <div className="bg-gray-400 w-full h-[2px]"></div>

@@ -2,6 +2,7 @@ import { ISong } from "../../interfaces/song";
 import { truncateString } from "../../utils/truncateString";
 import { replaceCaseSensitive } from "../../utils/replaceCaseSensitive";
 import { Tooltip } from "@mui/material";
+import { ReactNode } from "react";
 
 type Props = {
   song: ISong;
@@ -22,11 +23,13 @@ export function SongItem({
       
       <div className="flex flex-col justify-center min-w-0 px-1">
         <Tooltip title={song.name}>
-          <div className="truncate font-semibold text-gray-900">
-            {song.name}
-          </div>
-          <div className="truncate text-sm text-gray-500 mt-0.5">
-            {song.artistName || "-"}
+          <div>
+            <div className="truncate font-semibold text-gray-900">
+              {song.name}
+            </div>
+            <div className="truncate text-sm text-gray-500 mt-0.5">
+              {song.artistName || "-"}
+            </div>
           </div>
         </Tooltip>
       </div>
