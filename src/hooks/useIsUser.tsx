@@ -6,7 +6,7 @@ export function useIsUser() {
 
   const { id } = useParams();
 
-  const [isUser, setIsUser] = useState<boolean>(false);
+  const [isUser, setIsUser] = useState<boolean | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 

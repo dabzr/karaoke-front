@@ -5,7 +5,7 @@ import { IHost, ApiHostRoom } from "../interfaces/host";
 export function useIsHost() {
 
   const [host, setHost] = useState<IHost | null>(null);
-  const [isHost, setIsHost] = useState<boolean>(false);
+  const [isHost, setIsHost] = useState<boolean | null>(null);
   const [room, setRoom] = useState<ApiHostRoom>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
