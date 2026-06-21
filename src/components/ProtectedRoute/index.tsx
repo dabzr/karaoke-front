@@ -17,7 +17,7 @@ export function ProtectedRoute({
   const { isHost, isLoading: isLoadingHost } = useIsHost();
   const { isUser, isLoading: isLoadingUser } = useIsUser();
 
-  if(isLoadingHost || isLoadingUser) return <Loading/>
+  if(isLoadingHost || isLoadingUser && (isHost === null || isUser === null)) return <Loading/>
   
   if(type === "host" && !isHost) {
     return <Navigate to="/" replace/>
