@@ -17,7 +17,7 @@ export function SongQueue({
     strings[language][songString],
     strings[language][singerString]
   ],
-  generateSongItem = (song, index) => <SongItem song={song} index={index}/>
+  generateSongItem = (song, index) => <SongItem key={index} song={song} index={index}/>
 }: Props) {
 
   if(songs.length === 0){

@@ -59,6 +59,7 @@ export function useQueue(id: string)  {
     queue,
     isLoading,
     error,
+    setQueue,
   };
 }
 

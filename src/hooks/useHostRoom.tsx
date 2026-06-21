@@ -18,7 +18,7 @@ export function useHostRoom() {
   const [isSongPlaying, setIsSongPlaying] = useState<boolean>(false);
   const navigator = useNavigate();
   const [activeButton, setActiveButton] = useState<string>(strings[language][queueString]);
-  const { queue } = useQueue(id ?? "");
+  const { queue, setQueue } = useQueue(id ?? "");
   const { users } = useUsers(id ?? "");
 
   useEffect(() => {
@@ -40,7 +40,6 @@ export function useHostRoom() {
     editRoom(id ?? "", data)
       .then((data) => {
         setRoom(data)
-        console.log(data);
       })
       .catch((error) => {
         setError(error);
@@ -93,7 +92,9 @@ export function useHostRoom() {
   const handleRemoveSong = (songId: string) => {
     setIsLoading(true);
     deleteSong(id ?? "", songId)
-      .then(() => {})
+      .then((data) => {
+        setQueue((prev) => prev.filter((song) => song.id !== songId));
+      })
       .catch((err) => {
         setError(err);
       })

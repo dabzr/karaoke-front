@@ -18,8 +18,8 @@ export async function stopSong(code: string): Promise<string> {
 }
 
 export async function deleteSong(code: string, id: string) {
-  const res = await api.delete(queueRoomSongEndpoint(code, id))
-  return 1;
+  const res = await api.delete(queueRoomSongEndpoint(code, id));
+  return res.data;
 }
 
 export async function getLastSong(code: string) {
