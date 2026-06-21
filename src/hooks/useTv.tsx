@@ -5,7 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { url } from "../utils/settings";
 import { joinRoute } from "../utils/routes";
 import * as QRCode from 'qrcode';
-import { roomTopicQueueUrlEndpoint } from "../utils/endpoints";
+import { roomTopicQueueUrlEndpoint, usersTopicQueueQrEndpoint } from "../utils/endpoints";
 import SockJs from "sockjs-client";
 import { Client } from "@stomp/stompjs";
 import { backUrl } from "../utils/settings";
@@ -29,13 +29,26 @@ export function useTv() {
       reconnectDelay: 5000,
       debug: (str) => console.log(str),
     });
+    const stompClientQr = new Client({
+      webSocketFactory: socket,
+      reconnectDelay: 5000,
+      debug: (str) => console.log(str),
+    });
 
     stompClient.onConnect = () => {
       stompClient.subscribe(roomTopicQueueUrlEndpoint(id ?? ""), (message: {body: string}) => {
         if(message.body) {
-          console.log(message.body)
           const data = message.body;
           setVideoUrl(data);
+        }
+      });
+    };
+
+    stompClientQr.onConnect = () => {
+      stompClientQr.subscribe(usersTopicQueueQrEndpoint(id ?? ""), (message: {body: string}) => {
+        if(message.body) {
+          const data = message.body;
+          setVideoUrl("");
         }
       });
     };
@@ -44,11 +57,19 @@ export function useTv() {
       console.error("Erro no WS:", frame.headers["message"]);
     }
 
+    stompClientQr.onStompError = (frame) => {
+      console.error("Erro no WS do QrCode:", frame.headers["message"]);
+    }
+
     stompClient.activate();
+    stompClientQr.activate();
 
     return () => {
       if (stompClient.active) {
         stompClient.deactivate();
+      }
+      if (stompClientQr.active) {
+        stompClientQr.deactivate();
       }
     }
   }, [id])

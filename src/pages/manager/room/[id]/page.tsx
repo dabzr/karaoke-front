@@ -24,11 +24,12 @@ export function ManagerRoomPage() {
     isLoading,
     queue,
     users,
-    handleNextSong,
+    handleQueue,
     handleRemoveSong,
     error,
     handleCloseError,
     id,
+    isSongPlaying,
   } = useHostRoom();
 
   if(isLoading) return <Loading/>
@@ -108,7 +109,7 @@ export function ManagerRoomPage() {
         </div>
         <div className="flex justify-center w-full">
           <div>
-            <Button onClick={handleNextSong} label={strings[language][nextString]}/>
+            <Button onClick={handleQueue} label={isSongPlaying ? "Parar música" : strings[language][nextString]}/>
           </div>
         </div>
       </div>

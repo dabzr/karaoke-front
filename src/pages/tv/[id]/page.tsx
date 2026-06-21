@@ -35,15 +35,8 @@ export function TvPage() {
       <div className="fixed inset-0 flex flex-col py-14 h-screen overflow-hidden">
         <div className="flex p-2">
           <TopBar/>
-          <div className="flex justify-start">
-            <button onClick={returnPage} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <Tooltip title={strings[language][backString]}>
-                <ArrowBackIcon/>
-              </Tooltip>
-            </button>
-          </div>
         </div>
-        <div className="flex items-center justify-center pt-10">
+        <div className="flex items-center justify-center pt-20">
           <iframe 
             className="w-[90vw] h-[90vh] max-w-7xl max-h-180 aspect-video"
             src={`https://www.youtube.com/embed/${videoUrl}`}

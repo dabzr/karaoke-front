@@ -6,20 +6,19 @@ import { ICreateRoomParams } from "../mappers/room";
 import { strings, queueString } from "../utils/strings";
 import { language, url } from "../utils/settings";
 import { joinRoute } from "../utils/routes";
-import * as QRCode from 'qrcode';
 import { useQueue } from "./useQueue";
 import { useUsers } from "./useUsers";
-import { getNextSong, deleteSong } from "../services/queue";
+import { getNextSong, deleteSong, stopSong } from "../services/queue";
 
 export function useHostRoom() {
   const { id } = useParams();
 
   const [room, setRoom] = useState<IRoom>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>(null);
+  const [error, setError] = useState<string>("");
+  const [isSongPlaying, setIsSongPlaying] = useState<boolean>(false);
   const navigator = useNavigate();
   const [activeButton, setActiveButton] = useState<string>(strings[language][queueString]);
-  const [qrCodeUrl, setQrCodeUrl] = useState<string>("");
   const { queue } = useQueue(id ?? "");
   const { users } = useUsers(id ?? "");
 
@@ -37,12 +36,6 @@ export function useHostRoom() {
       });
   }, [])
 
-  useEffect(() => {
-    if(!room) return;
-    QRCode.toDataURL(`${url}${joinRoute}/${room.code}`, { width: 150, margin: 1 })
-    .then((url: string) => setQrCodeUrl(url))
-    }, [room])
-
   const handleEdit = (newData: ICreateRoomParams) => {
     setIsLoading(true);
     editRoom(id ?? "", newData)
@@ -57,15 +50,37 @@ export function useHostRoom() {
       });
   }
 
-  const handleNextSong = () => {
-    if(queue.length === 0) {
+  const handleQueue = () => {
+    if(queue.length === 0 && !isSongPlaying) {
       setError("Não há músicas na fila");
       return;
     }
+    if(isSongPlaying) {
+      handleStopSong();
+      return;
+    }
+    handleNextSong();
+  }
+
+  const handleStopSong = () => {
+    setIsLoading(true);
+    stopSong(id ?? "")
+      .then(() => {
+        setIsSongPlaying(false); 
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
+  const handleNextSong = () => {
     setIsLoading(true);
     getNextSong(id ?? "")
-      .then((data) => {
-        
+      .then(() => {
+        setIsSongPlaying(true); 
       })
       .catch((err) => {
         setError(err);
@@ -95,14 +110,14 @@ export function useHostRoom() {
     activeButton, 
     setActiveButton,
     handleEdit,
-    qrCodeUrl,
     isLoading,
     queue,
     users,
-    handleNextSong,
+    handleQueue,
     handleRemoveSong,
     error,
     handleCloseError,
     id,
+    isSongPlaying,
   }
 }

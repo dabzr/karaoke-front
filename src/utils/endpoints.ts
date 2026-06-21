@@ -15,3 +15,5 @@ export const usersTopicQueueEndpoint = (code: string) => `/topic/users${roomEndp
 export const roomTopicQueueUrlEndpoint = (code: string) => `/topic/queue${roomEndpoint}/${code}/url`;
 export const managerUpgradePlanEndpoint = (type: string) => `${managerEndpoint}/upgrade/{id}/${type}`;
 export const roomCodeEndpoint = (code: string) => `${roomEndpoint}/${code}`;
+export const roomQrScreenEndpoint = (code: string) => `${roomEndpoint}/${code}/qrscreen`;
+export const usersTopicQueueQrEndpoint = (code: string) => `${usersTopicQueueEndpoint(code)}/qr`
