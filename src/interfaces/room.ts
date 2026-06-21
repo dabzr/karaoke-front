@@ -21,6 +21,7 @@ export interface ICreateRoom {
   name: string;
   password?: string;
   max_room_size: number;
+  timeout_seconds: number;
 };
 
 export interface ApiRoom {

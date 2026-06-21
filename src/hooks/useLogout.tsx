@@ -1,5 +1,6 @@
 import { logout } from "../services/auth";
 import { useNavigate } from "react-router-dom";
+import { profileRoute } from "../utils/routes";
 
 export function useLogout() {
   const navigator = useNavigate();
@@ -9,5 +10,9 @@ export function useLogout() {
     navigator("/");
   }
 
-  return { handleLogout };
+  const goToProfilePage = () => {
+    navigator(profileRoute);
+  }
+
+  return { handleLogout, goToProfilePage };
 }

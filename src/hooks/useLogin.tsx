@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { login } from "../services/auth";
-import { managerRoomRoute, roomsRoute } from "../utils/routes";
+import { profileRoute  } from "../utils/routes";
 import { useNavigate } from "react-router-dom";
 import { strings, requiredFieldString } from "../utils/strings";
 import { language } from "../utils/settings";
@@ -44,17 +44,10 @@ export function useLogin() {
     }
     login(email, password)
       .then((res) => {
-        if(res.code) {
-          navigator(`${managerRoomRoute}/${res.code}`);
-          return;
-        }
-        navigator(`${roomsRoute}`);
+        navigator(`${profileRoute}`);
       })
       .catch((error) => {
-        const errorMessage = error.response.data.message;
-        if(errorMessage === "Esse gerente não tem sala.") {
-          navigator(`${roomsRoute}`);
-        }
+        const errorMessage = error.response.data.message
         setError(errorMessage);
       })
       .finally(() => {

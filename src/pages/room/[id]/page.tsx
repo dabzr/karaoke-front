@@ -10,7 +10,6 @@ export function RoomPage() {
 
   const { 
     room, 
-    goToProfilePage,
     isLoading,
     open,
     openModal,

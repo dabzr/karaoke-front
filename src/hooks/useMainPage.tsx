@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import img01 from "../assets/img-01.jpg";
 import img02 from "../assets/img-02.jpg";
 import img03 from "../assets/img-03.jpg";
+import { useNavigate } from "react-router-dom";
+import { loginRoute } from "../utils/routes";
 
 export function useMainPage() {
   const carouselData = [
@@ -17,6 +19,7 @@ export function useMainPage() {
   const [index, setIndex] = useState<number>(1);
   const [animation, setAnimation] = useState<boolean>(true);
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
+  const navigator = useNavigate();
 
   useEffect(() => {
     if (index === 4 || index === 0) {
@@ -48,6 +51,8 @@ export function useMainPage() {
 
   const setSlide = (i: number) => setIndex(i);
 
+  const goToLogin = () => navigator(loginRoute);
+
   return {
     animation,
     setSlide,
@@ -56,5 +61,6 @@ export function useMainPage() {
     index,
     carouselLength,
     setIsTransitioning,
+    goToLogin,
   }
 }

@@ -2,16 +2,17 @@ import { useIsHost } from "../../hooks/useIsHost";
 import { Loading } from "../Loading/index";
 import { ElementType } from "react";
 import { Navigate } from "react-router-dom";
+import { profileRoute } from "../../utils/routes";
 
 type Props = {
   Component: ElementType;
 }
 
 export function ProtectedRoute({
-  Component
+  Component,
 }: Props) {
   
-  const { host, isLoading, error, logout } = useIsHost();
+  const { host, room, isLoading, logout } = useIsHost();
 
   if(isLoading) return <Loading/>
   

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { getHost, logout } from "../services/auth";
-import { ApiHost } from "../interfaces/host";
+import { getHost, logout, getHostRoom } from "../services/auth";
+import { IHost, ApiHostRoom } from "../interfaces/host";
 
 export function useIsHost() {
 
-  const [host, setHost] = useState<ApiHost | null>(null);
+  const [host, setHost] = useState<IHost | null>(null);
+  const [room, setRoom] = useState<ApiHostRoom>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
@@ -15,13 +16,6 @@ export function useIsHost() {
         setHost(res);
       })
       .catch((err) => {
-        if(err.response && err.response.data.message === "Esse gerente não tem sala.") {
-          setHost({
-            "is_premium": false,
-            "max_room_size": 5,
-          })
-          return; 
-        }
         setError(err);
       })
       .finally(() => {
@@ -29,10 +23,26 @@ export function useIsHost() {
       })
   }, [])
 
+  useEffect(() => {
+    if(!host) return;
+    setIsLoading(true); 
+    getHostRoom()
+      .then((res) => {
+        setRoom(res)
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
+  }, [host])
+
   return {
     host,
     isLoading,
     error,
     logout,
+    room,
   }
 }

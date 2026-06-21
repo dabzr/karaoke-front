@@ -49,6 +49,10 @@ export const closeString = "close";
 export const nextString = "next";
 export const timeoutString = "timeout";
 export const removeString = "remove";
+export const planFree = "FREE";
+export const planPremiumDay = "PREMIUM_1DAY";
+export const planPremiumMonth = "PREMIUM_1MONTH";
+export const planPremiumYear = "PREMIUM_1YEAR";
 
 export const strings: {[locale: string]: {[key: string]: string}} = {
   "pt-br": {
@@ -102,5 +106,9 @@ export const strings: {[locale: string]: {[key: string]: string}} = {
     [nextString]: "Próxima",
     [timeoutString]: "Tempo de espera para colocar mais músicas (segundos)",
     [removeString]: "Excluir",
+    [planFree]: "Grátis",
+    [planPremiumDay]: "Diário",
+    [planPremiumMonth]: "Mensal",
+    [planPremiumYear]: "Anual",
   },
 };

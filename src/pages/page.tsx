@@ -1,6 +1,7 @@
 import { DefaultTopBar } from "../components/DefaultTopBar";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { useMainPage } from "../hooks/useMainPage";
+import { Plans } from "../components/Plans";
 
 export function HomePage() {   
 
@@ -12,6 +13,7 @@ export function HomePage() {
     index,
     carouselLength,
     setIsTransitioning,
+    goToLogin,
   } = useMainPage();
 
   return (
@@ -131,38 +133,7 @@ export function HomePage() {
             <div className="flex max-w-150 pt-5 justify-center items-center text-center text-lg md:text-xl wrap-anywhere">Usar papel para controlar a fila é desgastante, evita conflitos e torna a experiência mais divertida</div>
         </div>
 
-        <div className="flex flex-col pb-16 min-h-25 bg-white">
-          <span className="flex text-3xl font-black text-black tracking-tight justify-center pb-10">
-            Planos
-          </span>
-          <div className="flex flex-row w-full justify-around px-50 max-w-7xl mx-auto">
-            
-            <div className="flex flex-col rounded-2xl border border-neutral-200/80 shadow-sm hover:shadow-xl bg-white w-50 items-center p-6 transition-all duration-300 hover:-translate-y-1">
-              <span className="text-xl font-bold text-neutral-500 mb-1">Diário</span>
-              <span className="text-3xl font-black text-neutral-900 mb-6">R$ 0,00</span>
-              <button className="bg-neutral-900 hover:bg-neutral-800 active:bg-black p-2.5 rounded-xl w-[90%] font-semibold text-sm text-white transition-colors cursor-pointer shadow-sm">
-                Assinar
-              </button>
-            </div>
-            
-            <div className="flex flex-col rounded-2xl border border-neutral-200/80 shadow-sm hover:shadow-xl bg-white w-50 items-center p-6 transition-all duration-300 hover:-translate-y-1">
-              <span className="text-xl font-bold text-neutral-500 mb-1">Mensal</span>
-              <span className="text-3xl font-black text-neutral-900 mb-6">R$ 0,00</span>
-              <button className="bg-neutral-900 hover:bg-neutral-800 active:bg-black p-2.5 rounded-xl w-[90%] font-semibold text-sm text-white transition-colors cursor-pointer shadow-sm">
-                Assinar
-              </button>
-            </div>
-            
-            <div className="flex flex-col rounded-2xl border border-neutral-200/80 shadow-sm hover:shadow-xl bg-white w-50 items-center p-6 transition-all duration-300 hover:-translate-y-1">
-              <span className="text-xl font-bold text-neutral-500 mb-1">Anual</span>
-              <span className="text-3xl font-black text-neutral-900 mb-6">R$ 0,00</span>
-              <button className="bg-neutral-900 hover:bg-neutral-800 active:bg-black p-2.5 rounded-xl w-[90%] font-semibold text-sm text-white transition-colors cursor-pointer shadow-sm">
-                Assinar
-              </button>
-            </div>
-
-          </div>
-        </div>
+        <Plans onClick={(value: string) => goToLogin()}/>
 
         <div className="flex flex-row w-full bg-indigo text-white py-6 px-12 justify-between items-center">
           <div className="flex items-center gap-2">
