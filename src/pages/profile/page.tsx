@@ -103,7 +103,7 @@ export function ProfilePage() {
                     </span>
                     <button 
                       onClick={openRoomModal} 
-                      className="bg-neutral-900 hover:bg-neutral-800 active:bg-black px-8 py-3 rounded-xl font-bold text-sm text-white transition-all cursor-pointer shadow-md hover:shadow-lg w-full max-w-xs transform hover:-translate-y-0.5"
+                      className="bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 px-8 py-3 rounded-xl font-bold text-sm text-white transition-all cursor-pointer shadow-md hover:shadow-lg w-full max-w-xs transform hover:-translate-y-0.5"
                     >
                       {"Criar Sala"}
                     </button>

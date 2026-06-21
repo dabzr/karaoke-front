@@ -54,7 +54,7 @@ export function CreateRoomModal({
       open={open}
       onClose={onClose}
     >
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] bg-white border-2 border-gray-100 p-2 max-h-[90vh] overflow-y-auto">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-100 bg-white border-2 border-gray-100 p-2 max-h-[90vh] overflow-y-auto">
         <RoomForm
           title={strings[language][createRoomString]}
           successButtonText={strings[language][createString]}

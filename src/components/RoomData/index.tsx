@@ -65,42 +65,44 @@ export function RoomData({
 
   return (
     <>
-      <div className="absolute left-9/10 pt-2">
-        <button onClick={() => setOnEdit(true)}>
-          <Tooltip title={strings[language][editString]}>
-            <EditIcon/>
-          </Tooltip>
-        </button>
+      <div className="relative flex px-100 py-10">
+        <div className="absolute right-106 top-15">
+          <button onClick={() => setOnEdit(true)}>
+            <Tooltip title={strings[language][editString]}>
+              <EditIcon/>
+            </Tooltip>
+          </button>
+        </div>
+        <RoomForm
+          title={strings[language][roomDataString]}
+          name={name}
+          setName={setName}
+          nameError={nameError}
+          nameDisabled={!onEdit}
+          password={password}
+          setPassword={setPassword}
+          passwordDisabled={!onEdit}
+          maxQuantity={maxQuantity}
+          setMaxQuantity={setMaxQuantity}
+          maxQuantityDisabled={!onEdit}
+          maxQuantityError={maxQuantityError}
+          handleClose={handleClose}
+          handleSuccess={successEdit}
+          validations={validations}
+          successButtonText={strings[language][editString]}
+          buttonDisabled={!onEdit}
+          timeoutTimeDisabled={!onEdit}
+          timeoutTime={timeoutTime}
+          setTimeoutTime={setTimeoutTime}
+        >
+          <Input
+            label={strings[language][roomCodeString]}
+            value={room.code}
+            disabled={true}
+            required={true}
+          />
+        </RoomForm>
       </div>
-      <RoomForm
-        title={strings[language][roomDataString]}
-        name={name}
-        setName={setName}
-        nameError={nameError}
-        nameDisabled={!onEdit}
-        password={password}
-        setPassword={setPassword}
-        passwordDisabled={!onEdit}
-        maxQuantity={maxQuantity}
-        setMaxQuantity={setMaxQuantity}
-        maxQuantityDisabled={!onEdit}
-        maxQuantityError={maxQuantityError}
-        handleClose={handleClose}
-        handleSuccess={successEdit}
-        validations={validations}
-        successButtonText={strings[language][editString]}
-        buttonDisabled={!onEdit}
-        timeoutTimeDisabled={!onEdit}
-        timeoutTime={timeoutTime}
-        setTimeoutTime={setTimeoutTime}
-      >
-        <Input
-          label={strings[language][roomCodeString]}
-          value={room.code}
-          disabled={true}
-          required={true}
-        />
-      </RoomForm>
     </>
   );
 }

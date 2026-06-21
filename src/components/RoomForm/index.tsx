@@ -120,11 +120,13 @@ export function RoomForm({
             label={strings[language][cancelString]} 
             onClick={handleClose}
             disabled={buttonDisabled}
+            className={"bg-neutral-900 hover:bg-neutral-800 active:bg-black px-8 py-3 rounded-xl font-bold text-sm text-white transition-all cursor-pointer shadow-md hover:shadow-lg w-full max-w-xs transform hover:-translate-y-0.5"}
           />
           <Button 
             disabled={buttonDisabled}
             label={successButtonText}
             onClick={successFunction}
+            className={"bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 px-8 py-3 rounded-xl font-bold text-sm text-white transition-all cursor-pointer shadow-md hover:shadow-lg w-full max-w-xs transform hover:-translate-y-0.5"}
           />
         </div>
       </div>

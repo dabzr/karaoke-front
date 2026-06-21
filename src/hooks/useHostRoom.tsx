@@ -58,6 +58,10 @@ export function useHostRoom() {
   }
 
   const handleNextSong = () => {
+    if(queue.length === 0) {
+      setError("Não há músicas na fila");
+      return;
+    }
     setIsLoading(true);
     getNextSong(id ?? "")
       .then((data) => {
@@ -83,6 +87,8 @@ export function useHostRoom() {
       });
   }
 
+  const handleCloseError = () => setError("");
+
   return {
     room,
     navigator,
@@ -95,5 +101,8 @@ export function useHostRoom() {
     users,
     handleNextSong,
     handleRemoveSong,
+    error,
+    handleCloseError,
+    id,
   }
 }
