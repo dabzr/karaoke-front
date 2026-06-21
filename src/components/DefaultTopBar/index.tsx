@@ -8,10 +8,10 @@ export function DefaultTopBar() {
   return (
     <TopBar>
       <div className="flex items-center">
-        <a className="cursor-pointer block ml-2.5 font-bold text-sm" href={loginRoute}>
+        <a className="cursor-pointer block ml-2.5 font-bold text-base" href={loginRoute}>
           <span>{strings[language][loginString]}</span>
         </a>
-        <a className="cursor-pointer block ml-2.5 font-bold text-sm" href={registerRoute}>
+        <a className="cursor-pointer block ml-2.5 font-bold text-base" href={registerRoute}>
           <span>{strings[language][createAccountString]}</span>
         </a>
       </div>

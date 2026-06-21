@@ -1,54 +1,18 @@
 import { DefaultTopBar } from "../components/DefaultTopBar";
-import { useEffect, useState } from "react";
-import img01 from "../assets/img-01.jpg";
-import img02 from "../assets/img-02.jpg";
-import img03 from "../assets/img-03.jpg";
 import GitHubIcon from '@mui/icons-material/GitHub';
+import { useMainPage } from "../hooks/useMainPage";
 
 export function HomePage() {   
-  const carouselData = [
-    { img: img03, text: "Faça seu karaokê ser mais divertido!" },
-    { img: img01, text: "Organize seu karaokê facilmente!" },
-    { img: img02, text: "Preços acessíveis" },
-    { img: img03, text: "Faça seu karaokê ser mais divertido!" },
-    { img: img01, text: "Organize seu karaokê facilmente!" },
-  ];
 
-  const carouselLength = 3;
-
-  const [index, setIndex] = useState<number>(1);
-  const [animation, setAnimation] = useState<boolean>(true);
-  const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (index === 4 || index === 0) {
-      const resetTimer = setTimeout(() => {
-        setAnimation(false);
-        setIndex(index * -(1/2) + 3);
-        
-        setIsTransitioning(false); 
-      }, 700); 
-
-      return () => clearTimeout(resetTimer);
-    }
-
-    const timer = setInterval(() => {
-      changeSlide(1);
-      setIsTransitioning(false);
-    }, 5000);
-
-    return () => clearInterval(timer);
-  }, [index, carouselLength]);
-
-  const changeSlide = (alpha: number) => {
-    if(isTransitioning) return;
-    const nextIndex = (((index + alpha) % carouselData.length) + carouselData.length) % carouselData.length;
-    setAnimation(true);
-    setIsTransitioning(true);
-    setIndex(nextIndex);
-  }
-
-  const setSlide = (i: number) => setIndex(i);
+  const {
+    animation,
+    setSlide,
+    carouselData,
+    changeSlide,
+    index,
+    carouselLength,
+    setIsTransitioning,
+  } = useMainPage();
 
   return (
     <>
@@ -204,7 +168,7 @@ export function HomePage() {
           <div className="flex items-center gap-2">
             <span className="text-sm font-medium text-white">Contatos:</span>
           </div>
-          <a href="#" className="text-white hover:text-white transition-colors" aria-label="GitHub">
+          <a href="https://github.com/karaoke-manager-project" target="_blank" className="text-white hover:text-white transition-colors" aria-label="GitHub">
             <GitHubIcon className="text-3xl!" />
           </a>
         </div>
