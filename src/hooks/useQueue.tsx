@@ -5,11 +5,15 @@ import { Client } from "@stomp/stompjs";
 import { backUrl } from "../utils/settings";
 import { roomTopicQueueEndpoint } from "../utils/endpoints";
 import { getQueue } from "../services/queue";
+import { nanoid } from "nanoid";
 
 export function useQueue(id: string)  {
   const [queue, setQueue] = useState<ApiSong[]>([]); 
   const [isLoading, setIsLoading] = useState<boolean>(false); 
   const [error, setError] = useState<string>(""); 
+  const [key, setKey] = useState<string>(nanoid());
+
+  const refreshKey = () => setKey(nanoid());
 
   useEffect(() => {
     setIsLoading(true);
@@ -60,6 +64,7 @@ export function useQueue(id: string)  {
     isLoading,
     error,
     setQueue,
+    refreshKey,
   };
 }
 

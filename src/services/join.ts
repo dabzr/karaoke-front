@@ -11,7 +11,7 @@ export async function getRoomInfo(code: string): Promise<ApiRoomInfo> {
 
 export async function joinRoom(code: string, password: string, name: string): Promise<IUser> {
   const res = await api.post(joinRoomEndpoint(code), { name, password });
-  Cookies.set("accessToken", res.data);
+  Cookies.set("accessToken", res.data, { expires: 0.125 });
   Cookies.set("code", code, { expires: 0.125 });
   return {
     id: res.data,

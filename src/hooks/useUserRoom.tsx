@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import { getUserRoom } from "../services/room";
 import { IRoom } from "../interfaces/room";
-import { ISong } from "../interfaces/song";
 import { useNavigate, useParams } from "react-router-dom";
-import { useQueue } from "./useQueue";
-import { useQueueChange } from "./useQueueChange";
-import { getLastSong } from "../services/queue";
 import { sendEmoji } from "../services/emoji";
+import { nanoid } from "nanoid";
 
 export function useUserRoom() {
   const { id } = useParams();
@@ -17,10 +14,10 @@ export function useUserRoom() {
   const [error, setError] = useState(null);
   const [message, setMessage] = useState<string>("");
   const navigator = useNavigate();
-  const { queue } = useQueue(id ?? "");
-  const { code } = useQueueChange(id ?? "");
-  const [lastSong, setLastSong] = useState<ISong | null>(null);
   const [emojiDrawerOpened, setEmojiDrawerOpened] = useState<boolean>(false);
+  const [key, setKey] = useState<string>(nanoid());
+
+  const refreshKey = () => setKey(nanoid());
 
   useEffect(() => {
     setIsLoading(true);
@@ -34,21 +31,8 @@ export function useUserRoom() {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [])
+  }, [key])
 
-  useEffect(() => {
-    if(!code) {
-      setLastSong(null);
-      return;
-    }
-    getLastSong(id ?? "")
-      .then((data) => {
-        setLastSong(data[0]);
-      })
-      .catch((error) => {
-        setError(error);
-      })
-  }, [code])
 
   const goToProfilePage = () => {
     navigator("/user")
@@ -77,13 +61,12 @@ export function useUserRoom() {
     open,
     openModal,
     onClose,
-    queue,
     message,
     handleCloseError,
-    lastSong,
     setMessage,
     toggleEmojiDrawner,
     emojiDrawerOpened,
     handleSelectEmoji,
+    refreshKey,
   }
 }
