@@ -1,22 +1,26 @@
 import { useIsHost } from "../../hooks/useIsHost";
+import { useIsUser } from "../../hooks/useIsUser";
 import { Loading } from "../Loading/index";
 import { ElementType } from "react";
 import { Navigate } from "react-router-dom";
-import { profileRoute } from "../../utils/routes";
+import { managerRoomRoute, profileRoute, roomRoute } from "../../utils/routes";
 
 type Props = {
   Component: ElementType;
 }
 
 export function PublicRoute({
-  Component
+  Component,
 }: Props) {
   
-  // const { isLoading, isHost } = useIsHost();
+  const { isHost, isLoading: isHostLoading, room } = useIsHost();
+  const { isUser, isLoading: isLoadingUser, code } = useIsUser();
+  const isLoading = isHostLoading || isLoadingUser;
 
-  // if(isLoading) return <Loading/>
-  // 
-  // if(isHost) return <Navigate to={profileRoute} replace/>
+  if(isLoading && (isHost === null || isUser === null)) return <Loading/>
+
+  if(isHost) return <Navigate to={room ? `${managerRoomRoute}/${room.code}` : profileRoute } replace/>
+  if(isUser) return <Navigate to={`${roomRoute}/${code}`} replace/>
 
   return (
     <Component/>

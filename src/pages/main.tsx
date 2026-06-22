@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { roomRoute, joinRoute, loginRoute, registerRoute, managerRoomRoute, tvRoute, profileRoute } from "../utils/routes";
 import { JoinPage } from "./join/page";
 import { JoinIdPage } from "./join/[id]/page";
@@ -25,6 +25,7 @@ export const RoutesPages = () => {
         <Route path={joinRoute + "/:id"} element={<PublicRoute Component={JoinIdPage} />} />
         <Route path={tvRoute + "/:id"} element={<ProtectedRoute Component={TvPage} />} />
         <Route path={profileRoute} element={<ProtectedRoute Component={ProfilePage}/>} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
   )

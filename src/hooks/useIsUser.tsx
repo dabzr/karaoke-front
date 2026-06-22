@@ -7,6 +7,7 @@ export function useIsUser() {
   const { id } = useParams();
 
   const [isUser, setIsUser] = useState<boolean | null>(null);
+  const [code, setCode] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
@@ -15,6 +16,7 @@ export function useIsUser() {
     getUser(id ?? "")
       .then((data) => {
         setIsUser(true);
+        setCode(data);
       })
       .catch((err) => {
         setError(err);
@@ -28,5 +30,6 @@ export function useIsUser() {
     isUser,
     isLoading,
     error,
+    code,
   }
 }
