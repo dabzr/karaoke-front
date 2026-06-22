@@ -33,7 +33,7 @@ export function PasswordInput({
   };
 
   return (
-    <div className="flex flex-col gap-1">
+    <>
       <div className={`${error === "" ? "" : "text-red-500"} font-bold`}>{label} {required ? "" : " (Opcional)"}</div>
       <div className="relative flex items-center w-full">
         <input 
@@ -50,6 +50,6 @@ export function PasswordInput({
         </button>
       </div>
       <div className="min-h-[25px] max-h-[25px] text-red-500">{error}</div>
-    </div>
+    </>
   );
 }

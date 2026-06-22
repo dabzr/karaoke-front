@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { apiHostToHost } from "../mappers/host";
 
 export async function getHost(): Promise<IHost> {
+  if(!Cookies.get("accessToken")) throw new Error();
   const res = await api.get(managerEndpoint);
   return apiHostToHost(res.data);
 }
@@ -30,7 +31,9 @@ export async function register(email: string, password: string): Promise<boolean
   return true;
 }
 
-export async function getUser(id: string): Promise<boolean> {
-  const res = await api.get(roomUserEndpoint(id));
-  return true;
+export async function getUser(id: string): Promise<string> {
+  if(!Cookies.get("accessToken")) throw new Error();
+  const code = Cookies.get("code");
+  const res = await api.get(roomUserEndpoint(id ? id : code));
+  return code;
 }

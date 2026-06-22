@@ -7,11 +7,11 @@ import { loginRoute } from "../utils/routes";
 
 export function useMainPage() {
   const carouselData = [
-    { img: img03, text: "Faça seu karaokê ser mais divertido!" },
-    { img: img01, text: "Organize seu karaokê facilmente!" },
-    { img: img02, text: "Preços acessíveis" },
-    { img: img03, text: "Faça seu karaokê ser mais divertido!" },
-    { img: img01, text: "Organize seu karaokê facilmente!" },
+    { img: img03, text: "Faça seu karaokê ser mais divertido!", description: "Com reações em tempo real as suas músicas ficam ainda melhores" },
+    { img: img01, text: "Organize seu karaokê facilmente!", description: "Controle total da fila, moderação de usuários e reprodução automatizada em poucos cliques." },
+    { img: img02, text: "Para todos os públicos!", description: "Oferecimentos de planos diários, mensal e anual, a gente cabe no seu evento não importa o tamanho dele" },
+    { img: img03, text: "Faça seu karaokê ser mais divertido!", description: "Com reações em tempo real as suas músicas ficam ainda melhores" },
+    { img: img01, text: "Organize seu karaokê facilmente!", description: "Controle total da fila, moderação de usuários e reprodução automatizada em poucos cliques." },
   ];
 
   const carouselLength = 3;
