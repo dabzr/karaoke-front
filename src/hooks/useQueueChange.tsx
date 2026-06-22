@@ -3,10 +3,29 @@ import SockJs from "sockjs-client";
 import { Client } from "@stomp/stompjs";
 import { backUrl } from "../utils/settings";
 import { roomTopicQueueUrlEndpoint, usersTopicQueueQrEndpoint } from "../utils/endpoints";
+import { ISong } from "../interfaces/song";
+import { getLastSong } from "../services/queue";
+import { nanoid } from "nanoid";
 
 export function useQueueChange(id: string) {
 
-  const [code, setCode] = useState<string>("");
+  const [code, setCode] = useState<string | null>(null);
+  const [lastSong, setLastSong] = useState<ISong | null>(null);
+  const [key, setKey] = useState<string>(nanoid());
+
+  const refreshKey = () => setKey(nanoid());
+  
+  useEffect(() => {
+    if(code === "") {
+      setLastSong(null);
+      return;
+    }
+    getLastSong(id ?? "")
+      .then((data) => {
+        setLastSong(data[0]);
+      })
+      .catch((error) => {})
+  }, [code, key])
 
   useEffect(() => {
     const socket = () => new SockJs(backUrl + "/ws");
@@ -60,6 +79,8 @@ export function useQueueChange(id: string) {
   }, [id])
 
   return {
-    code
+    code,
+    lastSong,
+    refreshKey,
   }
 }

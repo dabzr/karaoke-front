@@ -7,24 +7,38 @@ import { Loading } from "../../../components/Loading/index";
 import { AddSongModal } from "./AddSongModal";
 import { Button } from "../../../components/Button";
 import { Toast } from "../../../components/Toast";
+import { useQueueChange } from "../../../hooks/useQueueChange";
+import { useQueue } from "../../../hooks/useQueue";
+import { useParams } from "react-router-dom";
 
 export function RoomPage() { 
 
+  const { id } = useParams();
   const { 
     room, 
     isLoading,
     open,
     openModal,
     onClose,
-    queue,
     message,
     handleCloseError,
-    lastSong,
     setMessage,
     toggleEmojiDrawner,
     emojiDrawerOpened,
     handleSelectEmoji,
+    refreshKey,
   } = useUserRoom();
+  const { queue, refreshKey: refreshQueue } = useQueue(id ?? "");
+  const { lastSong, refreshKey: refreshQueueChange } = useQueueChange(id ?? "");
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+      refreshKey();
+      refreshQueue();
+      refreshQueueChange();
+      alert("Voltouuuu!")
+    }
+  });
 
   if(isLoading) return <Loading/>
 
