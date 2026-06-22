@@ -47,10 +47,13 @@ export function HomePage() {
                   className="absolute inset-0 w-full h-full object-cover blur-xs brightness-[0.4]" 
                   alt={`Slide ${i}`}
                 />
-                <div className="relative z-10 w-full max-w-4xl px-8 text-center text-white drop-shadow-xl">
-                  <h2 className="text-4xl md:text-6xl font-black tracking-tight leading-tight wrap-break-words">
+                <div className="relative z-10 w-full max-w-3xl px-6 text-center text-white select-none">
+                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight mb-4 drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                     {slide.text}
                   </h2>
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-normal tracking-wide text-zinc-200 max-w-2xl mx-auto leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
+                    {slide.description}
+                  </h3>
                 </div>
               </div>
             ))}
@@ -89,8 +92,11 @@ export function HomePage() {
             <span className="text-4xl md:text-5xl font-extrabold text-white leading-tight tracking-tight wrap-break-words">
               Sistema de gerenciamento de karaokê
             </span>
-            <span className="text-lg md:text-xl text-white font-medium leading-relaxed wrap-anywhere">
-              Organize e gerencie a fila facilmente, tornando a experiência do seu usuário mais divertida.
+            <span className="text-lg md:text-xl text-white font-medium leading-relaxed wrap-anywhere text-justify">
+              Crie salas dinâmicas, gerencie a fila de reprodução facilmente e reúna quantos usuários quiser para cantar.
+              Seus convidados entram na hora e sem burocracia, direto pelo código da sala. Para deixar tudo ainda mais divertido, a plataforma agora conta com reações de emojis em tempo real!
+              Torça, vibre e interaja com os cantores da rodada enquanto a música toca.
+              É a evolução do karaokê colaborativo, direto no seu navegador.
             </span>
           </div>
           
@@ -130,7 +136,12 @@ export function HomePage() {
 
         <div className="flex flex-col w-full py-16 min-h-25 bg-white text-black justify-center items-center">
           <div className="flex w-full justify-center items-center font-extrabold text-4xl md:text-5xl">Porque você deveria usar nosso site?</div>
-            <div className="flex max-w-150 pt-5 justify-center items-center text-center text-lg md:text-xl wrap-anywhere">Usar papel para controlar a fila é desgastante, evita conflitos e torna a experiência mais divertida</div>
+            <div className="flex max-w-150 pt-5 justify-center items-center text-justify text-lg md:text-xl wrap-anywhere">
+              Substitua papel e caneta por um ecossistema digital que profissionaliza o seu evento.
+              Com o nosso sistema, seus clientes entram na fila direto pelo celular, via QR-Code, eliminando filas físicas e discussões sobre a vez de cantar.
+              Além de garantir uma rotação justa e automatizada de músicas, a plataforma aumenta o engajamento do público com reações em tempo real na tela.
+              Menos tempo lidando com problemas, mais clientes satisfeitos.
+            </div>
         </div>
 
         <Plans onClick={(value: string) => goToLogin()}/>

@@ -47,6 +47,10 @@ export function useLogin() {
         navigator(`${profileRoute}`);
       })
       .catch((error) => {
+        if(error.response.status === 400) {
+          setError("Email ou senha inválidos");
+          return;
+        }
         const errorMessage = error.response.data.message
         setError(errorMessage);
       })
