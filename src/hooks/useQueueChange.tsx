@@ -16,7 +16,7 @@ export function useQueueChange(id: string) {
   const refreshKey = () => setKey(nanoid());
   
   useEffect(() => {
-    if(code === "") {
+    if(code === "" || code === null) {
       setLastSong(null);
       return;
     }

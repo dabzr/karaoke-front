@@ -36,7 +36,6 @@ export function RoomPage() {
       refreshKey();
       refreshQueue();
       refreshQueueChange();
-      alert("Voltouuuu!")
     }
   });
 
