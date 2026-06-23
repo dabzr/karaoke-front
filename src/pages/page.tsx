@@ -31,7 +31,7 @@ export function HomePage() {
       `}</style>
 
       <DefaultTopBar />
-      <div className="pt-14 min-h-screen text-neutral-800 font-sans">
+      <div className="pt-14 min-h-screen text-neutral-800 font-sans overflow-x-hidden">
         
         <div className="relative flex flex-col justify-center h-[70vh] overflow-hidden w-full bg-neutral-950 shadow-inner">
           
@@ -100,7 +100,7 @@ export function HomePage() {
             </span>
           </div>
           
-          <div className="relative flex items-center justify-center w-36 h-36">
+          <div className="relative flex items-center justify-center w-36 h-36 hidden md:block">
             
             <svg viewBox="0 0 24 24" width="24" height="24" className="note-svg-1 absolute text-white top-2 left-2 fill-current">
               <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
@@ -135,8 +135,8 @@ export function HomePage() {
         </div>
 
         <div className="flex flex-col w-full py-16 min-h-25 bg-white text-black justify-center items-center">
-          <div className="flex w-full justify-center items-center font-extrabold text-4xl md:text-5xl">Porque você deveria usar nosso site?</div>
-            <div className="flex max-w-150 pt-5 justify-center items-center text-justify text-lg md:text-xl wrap-anywhere">
+          <div className="flex w-full justify-center items-center font-extrabold text-4xl text-center md:text-5xl">Porque você deveria usar nosso site?</div>
+            <div className="flex max-w-80 md:max-w-150 pt-5 justify-center items-center text-justify text-lg md:text-xl wrap-anywhere">
               Substitua papel e caneta por um ecossistema digital que profissionaliza o seu evento.
               Com o nosso sistema, seus clientes entram na fila direto pelo celular, via QR-Code, eliminando filas físicas e discussões sobre a vez de cantar.
               Além de garantir uma rotação justa e automatizada de músicas, a plataforma aumenta o engajamento do público com reações em tempo real na tela.
